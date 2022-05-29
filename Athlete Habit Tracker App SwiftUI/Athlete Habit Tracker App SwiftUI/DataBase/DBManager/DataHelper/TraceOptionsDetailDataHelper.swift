@@ -96,7 +96,7 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
             
             let dateFormatter = DateFormatter.init()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let dateTime = dateFormatter.date(from: "2022-05-07 00:00:00")!
+            let dateTime = dateFormatter.date(from: "2022-05-07 6:00:00")!
 
             let  detailModel2_2 = try TraceOptionsDetailDataHelper.findOneDay(date: dateTime,optionId: 1)
             
@@ -202,7 +202,7 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
         timeFormatter.dateFormat = "yy-MM-dd"
         let _dateStart = timeFormatter.string(from:dateFrom) as String
         let _dateEnd = timeFormatter.string(from:dateTo) as String
-        let query = table.filter(createTime >= _dateStart && createTime <= _dateEnd && self.optionId == optionId)
+        let query = table.filter(createTime >= _dateStart && createTime < _dateEnd && self.optionId == optionId)
         let items = try DB.prepare(query)
         var retArray = [T]()
         for item in  items {
@@ -220,7 +220,7 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
             throw DataAccessError.datastoreConnectionError
         }
         let now = date
-        let calendar = Calendar(identifier: .iso8601)
+        let calendar = Calendar(identifier: .gregorian)
         let yearForWeekOfYear = calendar.component(.yearForWeekOfYear, from: now)
         let weekNumber  = calendar.component(.weekOfYear, from: now)
         //print("weekNumber", weekNumber)
@@ -245,7 +245,7 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
         
     }
     
-    
+    //get table all data
     static func findAll() throws -> [T]? {
 
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
