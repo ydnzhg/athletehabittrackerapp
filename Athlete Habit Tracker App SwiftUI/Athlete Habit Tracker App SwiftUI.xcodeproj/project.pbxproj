@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0E214F0E2841C71300A64556 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E214F0D2841C71300A64556 /* libsqlite3.tbd */; };
-		0EE95F21284207350051F40C /* SQLite.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE95F20284207350051F40C /* SQLite.xcframework */; };
-		0EE95F222842076B0051F40C /* SQLite.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE95F20284207350051F40C /* SQLite.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0E3693E028432F7300AE26F0 /* SQLite.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE95F20284207350051F40C /* SQLite.xcframework */; };
+		0E3693E128432F7300AE26F0 /* SQLite.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE95F20284207350051F40C /* SQLite.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0E3693E42843389000AE26F0 /* TraceOptionsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3693E32843389000AE26F0 /* TraceOptionsDataModel.swift */; };
+		0E3693E628433A6200AE26F0 /* TraceOptionsDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3693E528433A6200AE26F0 /* TraceOptionsDataHelper.swift */; };
+		0E3693E828433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3693E728433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift */; };
+		0E3693EA28433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3693E928433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift */; };
 		0EE95F2D284209330051F40C /* SQLiteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F27284209330051F40C /* SQLiteDataStore.swift */; };
-		0EE95F2E284209330051F40C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F29284209330051F40C /* DataModel.swift */; };
+		0EE95F2E284209330051F40C /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F29284209330051F40C /* UserDataModel.swift */; };
 		0EE95F2F284209330051F40C /* UserinfoDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */; };
 		0EE95F30284209330051F40C /* DataHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F2C284209330051F40C /* DataHelperProtocol.swift */; };
 		F405460D283EE13E00D40FE1 /* RehabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F405460C283EE13E00D40FE1 /* RehabView.swift */; };
@@ -33,13 +37,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0EE95F1F2841FD4E0051F40C /* Embed Frameworks */ = {
+		0E3693E228432F7300AE26F0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 7;
+			dstSubfolderSpec = 10;
 			files = (
-				0EE95F222842076B0051F40C /* SQLite.xcframework in Embed Frameworks */,
+				0E3693E128432F7300AE26F0 /* SQLite.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,9 +52,13 @@
 
 /* Begin PBXFileReference section */
 		0E214F0D2841C71300A64556 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		0E3693E32843389000AE26F0 /* TraceOptionsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceOptionsDataModel.swift; sourceTree = "<group>"; };
+		0E3693E528433A6200AE26F0 /* TraceOptionsDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceOptionsDataHelper.swift; sourceTree = "<group>"; };
+		0E3693E728433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceOptionsDetailDataModel.swift; sourceTree = "<group>"; };
+		0E3693E928433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceOptionsDetailDataHelper.swift; sourceTree = "<group>"; };
 		0EE95F20284207350051F40C /* SQLite.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SQLite.xcframework; sourceTree = "<group>"; };
 		0EE95F27284209330051F40C /* SQLiteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteDataStore.swift; sourceTree = "<group>"; };
-		0EE95F29284209330051F40C /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		0EE95F29284209330051F40C /* UserDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserinfoDataHelper.swift; sourceTree = "<group>"; };
 		0EE95F2C284209330051F40C /* DataHelperProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelperProtocol.swift; sourceTree = "<group>"; };
 		F405460C283EE13E00D40FE1 /* RehabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RehabView.swift; sourceTree = "<group>"; };
@@ -78,7 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E214F0E2841C71300A64556 /* libsqlite3.tbd in Frameworks */,
-				0EE95F21284207350051F40C /* SQLite.xcframework in Frameworks */,
+				0E3693E028432F7300AE26F0 /* SQLite.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +131,9 @@
 		0EE95F28284209330051F40C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0EE95F29284209330051F40C /* DataModel.swift */,
+				0EE95F29284209330051F40C /* UserDataModel.swift */,
+				0E3693E32843389000AE26F0 /* TraceOptionsDataModel.swift */,
+				0E3693E728433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -133,6 +143,8 @@
 			children = (
 				0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */,
 				0EE95F2C284209330051F40C /* DataHelperProtocol.swift */,
+				0E3693E528433A6200AE26F0 /* TraceOptionsDataHelper.swift */,
+				0E3693E928433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift */,
 			);
 			path = DataHelper;
 			sourceTree = "<group>";
@@ -204,7 +216,7 @@
 				F41726222835EAF5007969E5 /* Sources */,
 				F41726232835EAF5007969E5 /* Frameworks */,
 				F41726242835EAF5007969E5 /* Resources */,
-				0EE95F1F2841FD4E0051F40C /* Embed Frameworks */,
+				0E3693E228432F7300AE26F0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -269,17 +281,21 @@
 				F4305DD72839C24F00DAF303 /* InputView.swift in Sources */,
 				F4F52755283D2EFF00AE1C13 /* ProfileView.swift in Sources */,
 				F4593AF3283EC84A00CDCD62 /* Palette.swift in Sources */,
+				0E3693E628433A6200AE26F0 /* TraceOptionsDataHelper.swift in Sources */,
 				F4305DD92839C5D900DAF303 /* SummaryView.swift in Sources */,
 				0EE95F30284209330051F40C /* DataHelperProtocol.swift in Sources */,
-				0EE95F2E284209330051F40C /* DataModel.swift in Sources */,
+				0EE95F2E284209330051F40C /* UserDataModel.swift in Sources */,
 				F4305DDD2839D07200DAF303 /* Theme.swift in Sources */,
+				0E3693E42843389000AE26F0 /* TraceOptionsDataModel.swift in Sources */,
 				F4F52753283C7B0100AE1C13 /* DayNavigationView.swift in Sources */,
 				F4305DE1283B1B0400DAF303 /* EntryView.swift in Sources */,
 				F4593AF5283ECF1300CDCD62 /* QuoteView.swift in Sources */,
 				0EE95F2F284209330051F40C /* UserinfoDataHelper.swift in Sources */,
 				F417262C2835EAF5007969E5 /* DailyView.swift in Sources */,
+				0E3693EA28433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift in Sources */,
 				F417262A2835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift in Sources */,
 				F4F5274F283C285700AE1C13 /* ChartAndDataView.swift in Sources */,
+				0E3693E828433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift in Sources */,
 				F4F52757283D352300AE1C13 /* User.swift in Sources */,
 				0EE95F2D284209330051F40C /* SQLiteDataStore.swift in Sources */,
 				F405460D283EE13E00D40FE1 /* RehabView.swift in Sources */,
@@ -411,7 +427,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Athlete Habit Tracker App SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = K5436W6BF3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -449,7 +465,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Athlete Habit Tracker App SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = K5436W6BF3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

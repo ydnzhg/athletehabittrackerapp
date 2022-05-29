@@ -19,11 +19,11 @@ struct UserInfoModel {
     var weight: Double = 0.0
     var gender: Bool = false
     var picturePath : String = ""
-    var createTime:Date = Date()
+    var createTime:String = ""
 
     init() {}
     
-    init(userID: Int, userName: String,height: Double,weight: Double,gender: Bool,picturePath : String,createTime:Date) {
+    init(userID: Int, userName: String,height: Double,weight: Double,gender: Bool,picturePath : String,createTime:String) {
         self.userID = userID
         self.userName = userName
         self.height = height
@@ -31,7 +31,6 @@ struct UserInfoModel {
         self.gender = gender
         self.picturePath = picturePath
         self.createTime = createTime
-        //self.icon = icon
 
     }
 }

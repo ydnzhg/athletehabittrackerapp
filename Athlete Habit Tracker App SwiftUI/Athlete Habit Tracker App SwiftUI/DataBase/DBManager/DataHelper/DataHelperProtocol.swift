@@ -1,6 +1,6 @@
 //
 //  DataHelperProtocol.swift
-//  HQSQLite-Swift
+//
 //
 //  Created by yejf on 2022/5/28.
 //  Copyright © 2022年 yejf. All rights reserved.

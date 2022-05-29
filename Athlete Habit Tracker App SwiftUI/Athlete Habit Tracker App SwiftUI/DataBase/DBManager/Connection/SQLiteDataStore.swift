@@ -29,7 +29,14 @@ class SQLiteDataStore {
                                                 FileManager.SearchPathDomainMask.allDomainsMask, true) as [NSString]
         
         let dir = dirs[0]
+        
         let path = dir.appendingPathComponent("myDB.sqlite");
+       // let fileManager = FileManager.default
+       // if fileManager.fileExists(atPath: path) {
+       // do {
+               // try fileManager.removeItem(atPath: path)
+               // } catch _{}
+       // }
         print("The DB Path:",path)
         
         
@@ -51,6 +58,9 @@ class SQLiteDataStore {
     func createTables() throws{
         do {
             try UserinfoDataHelper.createTable()
+            try TraceOptionsDataHelper.createTable()
+            try TraceOptionsDetailDataHelper.createTable()
+            //TraceOptionsDetailDataHelper.testDemo()
         } catch {
             throw DataAccessError.datastoreConnectionError
         }

@@ -1,30 +1,25 @@
 //
-//  UserinfoDataHelper.swift
-//  Swift
+//  TraceOptionsDataHelper.swift
+//  Athlete Habit Tracker App SwiftUI
 //
-//  Created by yejf on 2022/5/28.
-//  Copyright © 2022年 yejf. All rights reserved.
+//  Created by 叶建锋 on 2022/5/29.
 //
 
 import Foundation
 import SQLite
 
-class UserinfoDataHelper: DataHelperProtocol {
+class TraceOptionsDataHelper: DataHelperProtocol {
 
-    static let TABLE_NAME = "user_info"
+    static let TABLE_NAME = "user_trace_options"
     
-    static let userID = Expression<Int>("id")
-    static let userName = Expression<String>("username")
-    static let height = Expression<Double>("height")
-    static let weight = Expression<Double>("weight")
-    static let gender = Expression<Bool>("gender")
-    static let picturePath = Expression<String>("picturepath")
-    static let createTime = Expression<String>("createTime")
-
+    static let dataID = Expression<Int>("id")
+    static let optionName = Expression<String>("optionname")
+    static let goal = Expression<Double>("goal")
+    static let unit = Expression<String>("unit")
     
     static let table = Table(TABLE_NAME)
     
-    typealias T = UserInfoModel
+    typealias T = TraceOptionsDataModel
     
     static func createTable() throws {
 
@@ -33,26 +28,23 @@ class UserinfoDataHelper: DataHelperProtocol {
         }
         do {
             _ = try DB.run( table.create(ifNotExists: true) {t in
-                t.column(userID)
-                t.column(userName)
-                t.column(height)
-                t.column(weight)
-                t.column(gender)
-                t.column(picturePath)
-                t.column(createTime)
+                t.column(dataID)
+                t.column(optionName)
+                t.column(goal)
+                t.column(unit)
             })
         } catch _ {
             throw DataAccessError.datastoreConnectionError
         }
     }
-
+    
     static func insert(item: T) throws -> Int {
 
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
             throw DataAccessError.datastoreConnectionError
         }
         
-        let insert = table.insert(userID <- item.userID, userName <- item.userName, height <- item.height,weight <- item.weight,gender <- item.gender,picturePath <- item.picturePath,createTime <- item.createTime)
+        let insert = table.insert(dataID <- item.dataID, optionName <- item.optionName, goal <- item.goal,unit <- item.unit)
         do {
             let rowId = try DB.run(insert)
             guard rowId >= 0 else {
@@ -70,9 +62,9 @@ class UserinfoDataHelper: DataHelperProtocol {
             throw DataAccessError.datastoreConnectionError
         }
 
-        let query = table.filter(item.userID == userID)
+        let query = table.filter(item.dataID == dataID)
 
-        if try DB.run(query.update(userID <- item.userID, userName <- item.userName, height <- item.height,weight <- item.weight,gender <- item.gender,picturePath <- item.picturePath,createTime <- item.createTime)) > 0 {
+        if try DB.run(query.update(dataID <- item.dataID, optionName <- item.optionName, goal <- item.goal,unit <- item.unit)) > 0 {
             return true
         } else {
             return false
@@ -80,14 +72,14 @@ class UserinfoDataHelper: DataHelperProtocol {
 
     }
 
-    static func checkColumnExists(queryUserID: Int) throws -> Bool {
+    static func checkColumnExists(queryID: Int) throws -> Bool {
 
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
             throw DataAccessError.datastoreConnectionError
         }
 
 
-        let query = table.filter(queryUserID == userID).exists
+        let query = table.filter(queryID == dataID).exists
 
         let isExists = try DB.scalar(query)
         return  isExists
@@ -99,8 +91,8 @@ class UserinfoDataHelper: DataHelperProtocol {
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
             throw DataAccessError.datastoreConnectionError
         }
-        let id = item.userID
-        let query = table.filter(userID == id)
+        let id = item.dataID
+        let query = table.filter(dataID == id)
         do {
             let tmp = try DB.run(query.delete())
             guard tmp == 1 else {
@@ -117,12 +109,12 @@ class UserinfoDataHelper: DataHelperProtocol {
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
             throw DataAccessError.datastoreConnectionError
         }
-        let query = table.filter(queryUserID == userID)
+        let query = table.filter(queryUserID == dataID)
         let items = try DB.prepare(query)
         var retArray = [T]()
         for item in  items {
             
-            retArray.append(UserInfoModel(userID: item[userID], userName: item[userName],height: item[height],weight: item[weight],gender:item[gender], picturePath:item[picturePath],createTime: item[createTime]))
+            retArray.append(TraceOptionsDataModel(dataID: item[dataID], optionName: item[optionName],goal: item[goal],unit: item[unit]))
         }
         
         return retArray
@@ -137,7 +129,7 @@ class UserinfoDataHelper: DataHelperProtocol {
         var retArray = [T]()
         let items = try DB.prepare(table)
         for item in items {
-            retArray.append(UserInfoModel(userID: item[userID], userName: item[userName],height: item[height],weight: item[weight],gender:item[gender], picturePath:item[picturePath],createTime: item[createTime]))
+            retArray.append(TraceOptionsDataModel(dataID: item[dataID], optionName: item[optionName],goal: item[goal],unit: item[unit]))
         }
         
         return retArray

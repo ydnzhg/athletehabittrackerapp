@@ -7,16 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "95145807-F56A-498D-BD9E-B8D1100BD4E2"
+            uuid = "372EA5A7-273C-4E6C-B226-AF2E0EA7EACE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Athlete Habit Tracker App SwiftUI/DataBase/DBManager/DataHelper/UserinfoDataHelper.swift"
+            filePath = "Athlete Habit Tracker App SwiftUI/DataBase/DBManager/DataHelper/TraceOptionsDetailDataHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "createTable()"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "testDemo()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D64CDDB3-034F-4D4F-B1FA-029D783DDDD7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athlete Habit Tracker App SwiftUI/DataBase/DBManager/DataHelper/TraceOptionsDetailDataHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "testDemo()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EEF2B45E-68F8-4737-AB10-1F6EA03A2180"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athlete Habit Tracker App SwiftUI/DataBase/DBManager/DataHelper/TraceOptionsDetailDataHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "testDemo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
