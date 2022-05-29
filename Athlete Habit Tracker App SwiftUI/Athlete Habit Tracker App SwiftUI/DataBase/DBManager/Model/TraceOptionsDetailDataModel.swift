@@ -17,11 +17,11 @@ struct TraceOptionsDetailDataModel {
     var optionName: String = ""
     var score: Double = 0.0
     var unit : String = ""
-    var createTime:String = ""  //format: yy-mm-dd
+    var createTime:Date = Date() //
 
     init() {}
     
-    init(detailID: Int, optionId: Int,optionName: String,score: Double,unit : String,createTime:String) {
+    init(detailID: Int, optionId: Int,optionName: String,score: Double,unit : String,createTime:Date) {
         self.detailID = detailID
         self.optionId = optionId
         self.optionName = optionName

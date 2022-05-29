@@ -47,8 +47,10 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
             throw DataAccessError.datastoreConnectionError
         }
-        
-        let insert = table.insert(detailID <- item.detailID, optionId <- item.optionId, optionName <- item.optionName,score <- item.score,unit <- item.unit,createTime <- item.createTime)
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateStr = timeFormatter.string(from:item.createTime) as String
+        let insert = table.insert(detailID <- item.detailID, optionId <- item.optionId, optionName <- item.optionName,score <- item.score,unit <- item.unit,createTime <- dateStr)
         do {
             let rowId = try DB.run(insert)
             guard rowId >= 0 else {
@@ -67,8 +69,10 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
         }
 
         let query = table.filter(item.detailID == detailID)
-
-        if try DB.run(query.update(detailID <- item.detailID, optionId <- item.optionId, optionName <- item.optionName,score <- item.score,unit <- item.unit,createTime <- item.createTime)) > 0 {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateStr = timeFormatter.string(from:item.createTime) as String
+        if try DB.run(query.update(detailID <- item.detailID, optionId <- item.optionId, optionName <- item.optionName,score <- item.score,unit <- item.unit,createTime <- dateStr)) > 0 {
             return true
         } else {
             return false
@@ -78,25 +82,26 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
     static func testDemo() {
         do {
             /////
-            let id1 = try TraceOptionsDetailDataHelper.getNewId()
-            let  detailModel1 = TraceOptionsDetailDataModel.init(detailID: id1, optionId: 1, optionName:"optionName1", score: 200.0,unit:"min",createTime: "22-05-01")
-            try self.insert(item: detailModel1 )
-            //////
-            let id2 = try TraceOptionsDetailDataHelper.getNewId()
-            let  detailModel2 = TraceOptionsDetailDataModel.init(detailID: id2, optionId: 1, optionName:"optionName1", score: 300.0,unit:"min",createTime: "22-05-05")
-            try self.insert(item: detailModel2 )
-            /////
-            let id3 = try TraceOptionsDetailDataHelper.getNewId()
-            let  detailModel3 = TraceOptionsDetailDataModel.init(detailID: id3, optionId: 1, optionName:"optionName1", score: 300.0,unit:"min",createTime: "22-05-07")
-            try self.insert(item: detailModel3 )
-            ///
-            let id4 = try TraceOptionsDetailDataHelper.getNewId()
-            let  detailModel4 = TraceOptionsDetailDataModel.init(detailID: id4, optionId: 1, optionName:"optionName1", score: 300.0,unit:"min",createTime: "22-05-09")
-            try self.insert(item: detailModel4 )
-            
             let dateFormatter = DateFormatter.init()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let dateTime = dateFormatter.date(from: "2022-05-07 6:00:00")!
+            let id1 = try TraceOptionsDetailDataHelper.getNewId()
+            let  detailModel1 = TraceOptionsDetailDataModel.init(detailID: id1, optionId: 1, optionName:"optionName1", score: 200.0,unit:"min",createTime: dateFormatter.date(from: "2022-05-01 9:00:00")!)
+            try self.insert(item: detailModel1 )
+            //////
+            let id2 = try TraceOptionsDetailDataHelper.getNewId()
+            let  detailModel2 = TraceOptionsDetailDataModel.init(detailID: id2, optionId: 1, optionName:"optionName1", score: 300.0,unit:"min",createTime: dateFormatter.date(from: "2022-05-05 6:00:00")!)
+            try self.insert(item: detailModel2 )
+            /////
+            let id3 = try TraceOptionsDetailDataHelper.getNewId()
+            let  detailModel3 = TraceOptionsDetailDataModel.init(detailID: id3, optionId: 1, optionName:"optionName1", score: 300.0,unit:"min",createTime: dateFormatter.date(from: "2022-05-07 6:00:00")!)
+            try self.insert(item: detailModel3 )
+            ///
+            let id4 = try TraceOptionsDetailDataHelper.getNewId()
+            let  detailModel4 = TraceOptionsDetailDataModel.init(detailID: id4, optionId: 1, optionName:"optionName1", score: 300.0,unit:"min",createTime: dateFormatter.date(from: "2022-05-09 6:00:00")!)
+            try self.insert(item: detailModel4 )
+            
+            
 
             let  detailModel2_2 = try TraceOptionsDetailDataHelper.findOneDay(date: dateTime,optionId: 1)
             
@@ -166,9 +171,11 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
         let query = table.filter(queryUserID == detailID)
         let items = try DB.prepare(query)
         var retArray = [T]()
+        let dateFormatter = DateFormatter.init()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         for item in  items {
-            
-            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: item[createTime]))
+            let cTime = item[createTime]
+            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: dateFormatter.date(from: cTime)!))
         }
         
         return retArray
@@ -180,14 +187,14 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
             throw DataAccessError.datastoreConnectionError
         }
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yy-MM-dd"
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateStr = timeFormatter.string(from:date) as String
         let query = table.filter(createTime == dateStr && self.optionId == optionId)
         let items = try DB.prepare(query)
         var retArray = [T]()
         for item in  items {
-            
-            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[self.optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: item[createTime]))
+            let cTime = item[createTime]
+            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[self.optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: timeFormatter.date(from: cTime)!))
         }
         
         return retArray
@@ -199,15 +206,15 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
             throw DataAccessError.datastoreConnectionError
         }
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yy-MM-dd"
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let _dateStart = timeFormatter.string(from:dateFrom) as String
         let _dateEnd = timeFormatter.string(from:dateTo) as String
         let query = table.filter(createTime >= _dateStart && createTime < _dateEnd && self.optionId == optionId)
         let items = try DB.prepare(query)
         var retArray = [T]()
         for item in  items {
-            
-            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[self.optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: item[createTime]))
+            let cTime = item[createTime]
+            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[self.optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: timeFormatter.date(from: cTime)!))
         }
         
         return retArray
@@ -230,15 +237,15 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
         //print("startDate", startDate.description(with: .current))
         //print("endDate", endDate.description(with: .current))
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yy-MM-dd"
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let strWeekStart = timeFormatter.string(from:startDate) as String
         let strWeekEnd = timeFormatter.string(from:endDate) as String
         let query = table.filter(createTime >= strWeekStart && createTime < strWeekEnd && self.optionId == optionId)
         let items = try DB.prepare(query)
         var retArray = [T]()
         for item in  items {
-            
-            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[self.optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: item[createTime]))
+            let cTime = item[createTime]
+            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[self.optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: timeFormatter.date(from: cTime)!))
         }
         
         return retArray
@@ -253,8 +260,11 @@ class TraceOptionsDetailDataHelper: DataHelperProtocol {
         }
         var retArray = [T]()
         let items = try DB.prepare(table)
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         for item in items {
-            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: item[createTime]))
+            let cTime = item[createTime]
+            retArray.append(TraceOptionsDetailDataModel(detailID: item[detailID], optionId: item[optionId],optionName: item[optionName],score: item[score],unit: item[unit],createTime: timeFormatter.date(from: cTime)!))
         }
         
         return retArray
