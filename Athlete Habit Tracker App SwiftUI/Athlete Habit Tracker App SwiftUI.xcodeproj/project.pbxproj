@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E214F0E2841C71300A64556 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E214F0D2841C71300A64556 /* libsqlite3.tbd */; };
+		0EE95F21284207350051F40C /* SQLite.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE95F20284207350051F40C /* SQLite.xcframework */; };
+		0EE95F222842076B0051F40C /* SQLite.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE95F20284207350051F40C /* SQLite.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0EE95F2D284209330051F40C /* SQLiteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F27284209330051F40C /* SQLiteDataStore.swift */; };
+		0EE95F2E284209330051F40C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F29284209330051F40C /* DataModel.swift */; };
+		0EE95F2F284209330051F40C /* UserinfoDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */; };
+		0EE95F30284209330051F40C /* DataHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F2C284209330051F40C /* DataHelperProtocol.swift */; };
 		F405460D283EE13E00D40FE1 /* RehabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F405460C283EE13E00D40FE1 /* RehabView.swift */; };
 		F417262A2835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41726292835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift */; };
 		F417262C2835EAF5007969E5 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F417262B2835EAF5007969E5 /* DailyView.swift */; };
@@ -25,7 +32,27 @@
 		F4F52757283D352300AE1C13 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F52756283D352300AE1C13 /* User.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0EE95F1F2841FD4E0051F40C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				0EE95F222842076B0051F40C /* SQLite.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0E214F0D2841C71300A64556 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		0EE95F20284207350051F40C /* SQLite.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SQLite.xcframework; sourceTree = "<group>"; };
+		0EE95F27284209330051F40C /* SQLiteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteDataStore.swift; sourceTree = "<group>"; };
+		0EE95F29284209330051F40C /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserinfoDataHelper.swift; sourceTree = "<group>"; };
+		0EE95F2C284209330051F40C /* DataHelperProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelperProtocol.swift; sourceTree = "<group>"; };
 		F405460C283EE13E00D40FE1 /* RehabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RehabView.swift; sourceTree = "<group>"; };
 		F41726262835EAF5007969E5 /* Athlete Habit Tracker App SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Athlete Habit Tracker App SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41726292835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Athlete_Habit_Tracker_App_SwiftUIApp.swift; sourceTree = "<group>"; };
@@ -50,17 +77,72 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E214F0E2841C71300A64556 /* libsqlite3.tbd in Frameworks */,
+				0EE95F21284207350051F40C /* SQLite.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E214F0C2841C71300A64556 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0E214F0D2841C71300A64556 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0E214F512841F65400A64556 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				0EE95F25284209330051F40C /* DBManager */,
+				0EE95F20284207350051F40C /* SQLite.xcframework */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		0EE95F25284209330051F40C /* DBManager */ = {
+			isa = PBXGroup;
+			children = (
+				0EE95F26284209330051F40C /* Connection */,
+				0EE95F28284209330051F40C /* Model */,
+				0EE95F2A284209330051F40C /* DataHelper */,
+			);
+			path = DBManager;
+			sourceTree = "<group>";
+		};
+		0EE95F26284209330051F40C /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				0EE95F27284209330051F40C /* SQLiteDataStore.swift */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		0EE95F28284209330051F40C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0EE95F29284209330051F40C /* DataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0EE95F2A284209330051F40C /* DataHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */,
+				0EE95F2C284209330051F40C /* DataHelperProtocol.swift */,
+			);
+			path = DataHelper;
+			sourceTree = "<group>";
+		};
 		F417261D2835EAF4007969E5 = {
 			isa = PBXGroup;
 			children = (
 				F41726282835EAF5007969E5 /* Athlete Habit Tracker App SwiftUI */,
 				F41726272835EAF5007969E5 /* Products */,
+				0E214F0C2841C71300A64556 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +157,7 @@
 		F41726282835EAF5007969E5 /* Athlete Habit Tracker App SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				0E214F512841F65400A64556 /* DataBase */,
 				F4305DDB2839D03500DAF303 /* Models */,
 				F41726292835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift */,
 				F4305DE0283B1B0400DAF303 /* EntryView.swift */,
@@ -121,6 +204,7 @@
 				F41726222835EAF5007969E5 /* Sources */,
 				F41726232835EAF5007969E5 /* Frameworks */,
 				F41726242835EAF5007969E5 /* Resources */,
+				0EE95F1F2841FD4E0051F40C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,14 +270,18 @@
 				F4F52755283D2EFF00AE1C13 /* ProfileView.swift in Sources */,
 				F4593AF3283EC84A00CDCD62 /* Palette.swift in Sources */,
 				F4305DD92839C5D900DAF303 /* SummaryView.swift in Sources */,
+				0EE95F30284209330051F40C /* DataHelperProtocol.swift in Sources */,
+				0EE95F2E284209330051F40C /* DataModel.swift in Sources */,
 				F4305DDD2839D07200DAF303 /* Theme.swift in Sources */,
 				F4F52753283C7B0100AE1C13 /* DayNavigationView.swift in Sources */,
 				F4305DE1283B1B0400DAF303 /* EntryView.swift in Sources */,
 				F4593AF5283ECF1300CDCD62 /* QuoteView.swift in Sources */,
+				0EE95F2F284209330051F40C /* UserinfoDataHelper.swift in Sources */,
 				F417262C2835EAF5007969E5 /* DailyView.swift in Sources */,
 				F417262A2835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift in Sources */,
 				F4F5274F283C285700AE1C13 /* ChartAndDataView.swift in Sources */,
 				F4F52757283D352300AE1C13 /* User.swift in Sources */,
+				0EE95F2D284209330051F40C /* SQLiteDataStore.swift in Sources */,
 				F405460D283EE13E00D40FE1 /* RehabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,8 +411,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Athlete Habit Tracker App SwiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = K5436W6BF3;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
+					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
+					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Athlete Habit Tracker App SwiftUI/DataBase/SQLite\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -338,6 +435,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ydnzhg.Athlete-Habit-Tracker-App-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -351,8 +449,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Athlete Habit Tracker App SwiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = K5436W6BF3;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
+					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
+					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Athlete Habit Tracker App SwiftUI/DataBase/SQLite\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -366,6 +472,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ydnzhg.Athlete-Habit-Tracker-App-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
