@@ -18,4 +18,3 @@ struct InputView_Previews: PreviewProvider {
         InputView()
     }
 }
-

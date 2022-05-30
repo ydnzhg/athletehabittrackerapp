@@ -5,23 +5,20 @@
 //  Created by Zhang, Xiaodong on 5/23/22.
 //
 
+
 import SwiftUI
 
 struct ChartAndDataView: View {
     
     let entries: [Entry]
     
-    let exampleDates = ["5/1/22", "5/2/22", "5/3/22", "5/4/22", "5/5/22", "5/6/22", "5/7/22"]
-    
+    let exampleDates = ["5/1", "5/2", "5/3", "5/4", "5/5", "5/6", "5/7"]
+        
     @State var selectedEntry = 0
     
     var body: some View {
         VStack {
             VStack {
-                DayNavigationView(date: "This Week")
-                
-                Spacer()
-
                 HStack {
                     Text("Summary")
                         .font(.title.bold())
@@ -38,7 +35,7 @@ struct ChartAndDataView: View {
                         Text("\(Entry.sampleData[5].title)").tag(5)
                     }
                     .padding(.horizontal)
-                    .background(Color.twinkleblue)
+                    .background(Color.bluegrey.opacity(0.15))
                     .cornerRadius(5)
                 }
                 .padding(.top,5)
@@ -53,7 +50,7 @@ struct ChartAndDataView: View {
                     //    .padding(Edge.Set.leading, -20)
                     HStack(alignment: .bottom, spacing: 15) {
                         ForEach(0...6, id: \.self) { num in
-                            BarView(value: barHeightCalculation(entry: selectedEntry, day: num), day: num)
+                            BarView2(value: barHeightCalculation(entry: selectedEntry, day: num), day: num)
                         }
                         
                     }
@@ -84,18 +81,18 @@ struct BarChartView_Previews: PreviewProvider {
         ChartAndDataView(entries: Entry.sampleData)
     }
 }
-
-struct BarView: View {
+ 
+struct BarView2: View {
     var value: Int
     var day: Int
-    
+
     let days = ["M", "T", "W", "T", "F", "S", "S"]
-    
+
     var body: some View {
         VStack {
             ZStack (alignment: .bottom) {
                 Capsule()
-                    .frame(width: 30, height:200)
+                   .frame(width: 30, height:200)
                     .foregroundColor(Color(.white))
                 Capsule()
                     .frame(width: 30, height: 150)
@@ -113,4 +110,3 @@ struct BarView: View {
 func barHeightCalculation(entry: Int, day: Int) -> Int {
     return Int((Double(Entry.sampleData[entry].lastWeek[day]) / Double(Entry.sampleData[entry].goal)) * 150)
 }
-

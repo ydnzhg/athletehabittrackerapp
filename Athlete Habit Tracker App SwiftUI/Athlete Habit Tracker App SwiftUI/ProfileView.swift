@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
+    @State private var isPresentingInfoEditView = false
+    @State private var isPresentingGoalEditView = false
+    @State private var isPresentingQuoteEditView = false
+
+
     let user: User
 
     var body: some View {
@@ -48,20 +54,86 @@ struct ProfileView: View {
             .padding(.bottom, 15)
             
             List {
-                HStack {
-                    Label("Edit User Information", systemImage: "pencil.circle.fill")
-                    Spacer()
-                    Image(systemName: "chevron.right")
+                Button(action: {
+                    isPresentingInfoEditView = true
+                }) {
+                    HStack {
+                        Label("Edit User Information", systemImage: "pencil")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
                 }
-                HStack {
-                    Label("Change Daily Goals", systemImage: "flag.2.crossed.fill")
-                    Spacer()
-                    Image(systemName: "chevron.right")
+                .sheet(isPresented: $isPresentingInfoEditView) {
+                    NavigationView {
+                        InfoEditView()
+                            .navigationTitle("Edit Info")
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button("Cancel") {
+                                        isPresentingInfoEditView = false
+                                    }
+                                }
+                                ToolbarItem(placement: .confirmationAction) {
+                                    Button("Done") {
+                                        isPresentingInfoEditView = false
+                                    }
+                                }
+                            }
+                    }
                 }
-                HStack {
-                    Label("Set New Quote", systemImage: "quote.closing")
-                    Spacer()
-                    Image(systemName: "chevron.right")
+                Button(action: {
+                    isPresentingGoalEditView = true
+                }) {
+                    HStack {
+                        Label("Change Daily Goals", systemImage: "flag.2.crossed.fill")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                }
+                .sheet(isPresented: $isPresentingGoalEditView) {
+                    NavigationView {
+                        GoalEditView(entries: Entry.sampleData, measurements: Measurement.sampleData)
+                            .navigationTitle("Change Goals")
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button("Cancel") {
+                                        isPresentingGoalEditView = false
+                                    }
+                                }
+                                ToolbarItem(placement: .confirmationAction) {
+                                    Button("Done") {
+                                        isPresentingGoalEditView = false
+                                    }
+                                }
+                            }
+                    }
+                }
+                Button(action: {
+                    isPresentingQuoteEditView = true
+                }) {
+                    HStack {
+                        Label("Set New Quote", systemImage: "quote.closing")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                }
+                .sheet(isPresented: $isPresentingQuoteEditView) {
+                    NavigationView {
+                        QuoteView()
+                            .navigationTitle("Set Quote")
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button("Cancel") {
+                                        isPresentingQuoteEditView = false
+                                    }
+                                }
+                                ToolbarItem(placement: .confirmationAction) {
+                                    Button("Done") {
+                                        isPresentingQuoteEditView = false
+                                    }
+                                }
+                            }
+                    }
                 }
             }
     

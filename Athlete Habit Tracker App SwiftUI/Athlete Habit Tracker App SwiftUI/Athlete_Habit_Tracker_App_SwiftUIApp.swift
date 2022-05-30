@@ -9,20 +9,31 @@ import SwiftUI
 
 @main
 struct Athlete_Habit_Tracker_App_SwiftUIApp: App {
-    init() {
-        creatDB()
-    }
+    
+    @State private var isPresentingInitialInput = true
+    
     var body: some Scene {
         WindowGroup {
-            DailyView(entries: Entry.sampleData)
-        }
-
-    }
-    func creatDB() {
-        do {
-            try  SQLiteDataStore.sharedInstance.createTables()
-        } catch _ {
-            print("creat DB Error")
+            // ContentView(isPresentingInfoEditView: true, isPresentingCalendarView: false, intensity: .constant(0.0), sets: .constant(0), pain: .constant(0.0), entries: Entry.sampleData, selectedTabIndex: 0)
+            ContentView(intensity: .constant(0.0), sets: .constant(0), pain: .constant(0.0), entries: Entry.sampleData, measurements: Measurement.sampleData, selectedTabIndex: 0)
+                .sheet(isPresented: $isPresentingInitialInput) {
+                    NavigationView {
+                        InfoEditView()
+                            .navigationTitle("Welcome!")
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button("Cancel") {
+                                        isPresentingInitialInput = false
+                                    }
+                                }
+                                ToolbarItem(placement: .confirmationAction) {
+                                    Button("Done") {
+                                        isPresentingInitialInput = false
+                                    }
+                                }
+                            }
+                    }
+                }
         }
     }
 }

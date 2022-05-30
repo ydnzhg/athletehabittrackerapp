@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct DayNavigationView: View {
-    @State private var chosenDay = Date()
     
-    var date: String
+    @Binding var isPresentingCalendarView: Bool
+    @Binding var date: Date
+    
+    var timePeriod: String
     
     var body: some View {
         HStack {
             Button(action: {}) {
                 Image(systemName: "chevron.backward")
             }
-            Text("\(date)")
+            Text("\(timePeriod)")
                 .font(.title.bold())
             Button(action: {}) {
                 Image(systemName: "chevron.forward")
@@ -25,19 +27,24 @@ struct DayNavigationView: View {
         }
         .frame(maxWidth: .infinity)
         .overlay(alignment: .trailing) {
-            Button(action: {}) {
+            Button(action: {
+                isPresentingCalendarView = true
+            }) {
                 Image(systemName: "calendar")
                     .resizable()
                     .frame(width: 20, height: 20)
             }
             .padding()
+            .popover(present: $isPresentingCalendarView) {
+                CalendarPopoverView(date: $date)
+            }
         }
+        
     }
 }
 
 struct DayNavigationView_Previews: PreviewProvider {
     static var previews: some View {
-        DayNavigationView(date: "This Week")
-            .previewLayout(.fixed(width: 400, height: 50))
+        DayNavigationView(isPresentingCalendarView: .constant(true), date: .constant(Date()), timePeriod: "This Week")
     }
 }

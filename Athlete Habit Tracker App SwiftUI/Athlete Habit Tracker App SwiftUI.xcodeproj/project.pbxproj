@@ -7,17 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E214F0E2841C71300A64556 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E214F0D2841C71300A64556 /* libsqlite3.tbd */; };
-		0E3693E028432F7300AE26F0 /* SQLite.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE95F20284207350051F40C /* SQLite.xcframework */; };
-		0E3693E128432F7300AE26F0 /* SQLite.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE95F20284207350051F40C /* SQLite.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0E3693E42843389000AE26F0 /* TraceOptionsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3693E32843389000AE26F0 /* TraceOptionsDataModel.swift */; };
-		0E3693E628433A6200AE26F0 /* TraceOptionsDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3693E528433A6200AE26F0 /* TraceOptionsDataHelper.swift */; };
-		0E3693E828433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3693E728433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift */; };
-		0E3693EA28433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3693E928433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift */; };
-		0EE95F2D284209330051F40C /* SQLiteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F27284209330051F40C /* SQLiteDataStore.swift */; };
-		0EE95F2E284209330051F40C /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F29284209330051F40C /* UserDataModel.swift */; };
-		0EE95F2F284209330051F40C /* UserinfoDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */; };
-		0EE95F30284209330051F40C /* DataHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE95F2C284209330051F40C /* DataHelperProtocol.swift */; };
 		F405460D283EE13E00D40FE1 /* RehabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F405460C283EE13E00D40FE1 /* RehabView.swift */; };
 		F417262A2835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41726292835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift */; };
 		F417262C2835EAF5007969E5 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F417262B2835EAF5007969E5 /* DailyView.swift */; };
@@ -30,37 +19,24 @@
 		F4305DE1283B1B0400DAF303 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4305DE0283B1B0400DAF303 /* EntryView.swift */; };
 		F4593AF3283EC84A00CDCD62 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4593AF2283EC84A00CDCD62 /* Palette.swift */; };
 		F4593AF5283ECF1300CDCD62 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4593AF4283ECF1300CDCD62 /* QuoteView.swift */; };
+		F46FC96C2842DAC300B85568 /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = F46FC96B2842DAC300B85568 /* Popovers */; };
+		F46FC96E2842DB1100B85568 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FC96D2842DB1100B85568 /* TestView.swift */; };
+		F46FC9722842FB4900B85568 /* InfoEditDraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46FC9712842FB4900B85568 /* InfoEditDraftView.swift */; };
+		F4702CC6284123180044B66D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4702CC5284123180044B66D /* ContentView.swift */; };
+		F4C88DA22843C98800888164 /* InfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C88DA12843C98800888164 /* InfoEditView.swift */; };
+		F4C88DA42844527400888164 /* GoalEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C88DA32844527400888164 /* GoalEditView.swift */; };
+		F4C88DA82844658E00888164 /* CalendarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C88DA72844658E00888164 /* CalendarPopoverView.swift */; };
+		F4C88DAB28447DC100888164 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C88DAA28447DC100888164 /* Measurement.swift */; };
+		F4C88DAD2844863C00888164 /* EntryInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C88DAC2844863C00888164 /* EntryInputView.swift */; };
+		F4F26A02284133B70081A499 /* LoadCapacityPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F26A01284133B70081A499 /* LoadCapacityPredictionView.swift */; };
+		F4F26A0428415B8E0081A499 /* EntryModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F26A0328415B8E0081A499 /* EntryModalView.swift */; };
 		F4F5274F283C285700AE1C13 /* ChartAndDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F5274E283C285700AE1C13 /* ChartAndDataView.swift */; };
 		F4F52753283C7B0100AE1C13 /* DayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F52752283C7B0100AE1C13 /* DayNavigationView.swift */; };
 		F4F52755283D2EFF00AE1C13 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F52754283D2EFF00AE1C13 /* ProfileView.swift */; };
 		F4F52757283D352300AE1C13 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F52756283D352300AE1C13 /* User.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		0E3693E228432F7300AE26F0 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				0E3693E128432F7300AE26F0 /* SQLite.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		0E214F0D2841C71300A64556 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		0E3693E32843389000AE26F0 /* TraceOptionsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceOptionsDataModel.swift; sourceTree = "<group>"; };
-		0E3693E528433A6200AE26F0 /* TraceOptionsDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceOptionsDataHelper.swift; sourceTree = "<group>"; };
-		0E3693E728433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceOptionsDetailDataModel.swift; sourceTree = "<group>"; };
-		0E3693E928433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceOptionsDetailDataHelper.swift; sourceTree = "<group>"; };
-		0EE95F20284207350051F40C /* SQLite.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SQLite.xcframework; sourceTree = "<group>"; };
-		0EE95F27284209330051F40C /* SQLiteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteDataStore.swift; sourceTree = "<group>"; };
-		0EE95F29284209330051F40C /* UserDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
-		0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserinfoDataHelper.swift; sourceTree = "<group>"; };
-		0EE95F2C284209330051F40C /* DataHelperProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelperProtocol.swift; sourceTree = "<group>"; };
 		F405460C283EE13E00D40FE1 /* RehabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RehabView.swift; sourceTree = "<group>"; };
 		F41726262835EAF5007969E5 /* Athlete Habit Tracker App SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Athlete Habit Tracker App SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41726292835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Athlete_Habit_Tracker_App_SwiftUIApp.swift; sourceTree = "<group>"; };
@@ -74,6 +50,16 @@
 		F4305DE0283B1B0400DAF303 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		F4593AF2283EC84A00CDCD62 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		F4593AF4283ECF1300CDCD62 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
+		F46FC96D2842DB1100B85568 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		F46FC9712842FB4900B85568 /* InfoEditDraftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoEditDraftView.swift; sourceTree = "<group>"; };
+		F4702CC5284123180044B66D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F4C88DA12843C98800888164 /* InfoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoEditView.swift; sourceTree = "<group>"; };
+		F4C88DA32844527400888164 /* GoalEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditView.swift; sourceTree = "<group>"; };
+		F4C88DA72844658E00888164 /* CalendarPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopoverView.swift; sourceTree = "<group>"; };
+		F4C88DAA28447DC100888164 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		F4C88DAC2844863C00888164 /* EntryInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryInputView.swift; sourceTree = "<group>"; };
+		F4F26A01284133B70081A499 /* LoadCapacityPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCapacityPredictionView.swift; sourceTree = "<group>"; };
+		F4F26A0328415B8E0081A499 /* EntryModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryModalView.swift; sourceTree = "<group>"; };
 		F4F5274E283C285700AE1C13 /* ChartAndDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAndDataView.swift; sourceTree = "<group>"; };
 		F4F52752283C7B0100AE1C13 /* DayNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayNavigationView.swift; sourceTree = "<group>"; };
 		F4F52754283D2EFF00AE1C13 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -85,76 +71,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E214F0E2841C71300A64556 /* libsqlite3.tbd in Frameworks */,
-				0E3693E028432F7300AE26F0 /* SQLite.xcframework in Frameworks */,
+				F46FC96C2842DAC300B85568 /* Popovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E214F0C2841C71300A64556 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0E214F0D2841C71300A64556 /* libsqlite3.tbd */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0E214F512841F65400A64556 /* DataBase */ = {
-			isa = PBXGroup;
-			children = (
-				0EE95F25284209330051F40C /* DBManager */,
-				0EE95F20284207350051F40C /* SQLite.xcframework */,
-			);
-			path = DataBase;
-			sourceTree = "<group>";
-		};
-		0EE95F25284209330051F40C /* DBManager */ = {
-			isa = PBXGroup;
-			children = (
-				0EE95F26284209330051F40C /* Connection */,
-				0EE95F28284209330051F40C /* Model */,
-				0EE95F2A284209330051F40C /* DataHelper */,
-			);
-			path = DBManager;
-			sourceTree = "<group>";
-		};
-		0EE95F26284209330051F40C /* Connection */ = {
-			isa = PBXGroup;
-			children = (
-				0EE95F27284209330051F40C /* SQLiteDataStore.swift */,
-			);
-			path = Connection;
-			sourceTree = "<group>";
-		};
-		0EE95F28284209330051F40C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0EE95F29284209330051F40C /* UserDataModel.swift */,
-				0E3693E32843389000AE26F0 /* TraceOptionsDataModel.swift */,
-				0E3693E728433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		0EE95F2A284209330051F40C /* DataHelper */ = {
-			isa = PBXGroup;
-			children = (
-				0EE95F2B284209330051F40C /* UserinfoDataHelper.swift */,
-				0EE95F2C284209330051F40C /* DataHelperProtocol.swift */,
-				0E3693E528433A6200AE26F0 /* TraceOptionsDataHelper.swift */,
-				0E3693E928433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift */,
-			);
-			path = DataHelper;
-			sourceTree = "<group>";
-		};
 		F417261D2835EAF4007969E5 = {
 			isa = PBXGroup;
 			children = (
 				F41726282835EAF5007969E5 /* Athlete Habit Tracker App SwiftUI */,
 				F41726272835EAF5007969E5 /* Products */,
-				0E214F0C2841C71300A64556 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,17 +97,21 @@
 		F41726282835EAF5007969E5 /* Athlete Habit Tracker App SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				0E214F512841F65400A64556 /* DataBase */,
 				F4305DDB2839D03500DAF303 /* Models */,
+				F4C88DA928446B5300888164 /* Not Used Anymore */,
 				F41726292835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift */,
-				F4305DE0283B1B0400DAF303 /* EntryView.swift */,
+				F4702CC5284123180044B66D /* ContentView.swift */,
 				F417262B2835EAF5007969E5 /* DailyView.swift */,
+				F4F26A0328415B8E0081A499 /* EntryModalView.swift */,
+				F4C88DAC2844863C00888164 /* EntryInputView.swift */,
 				F405460C283EE13E00D40FE1 /* RehabView.swift */,
-				F4593AF4283ECF1300CDCD62 /* QuoteView.swift */,
-				F4305DD82839C5D900DAF303 /* SummaryView.swift */,
-				F4F52754283D2EFF00AE1C13 /* ProfileView.swift */,
-				F4F52752283C7B0100AE1C13 /* DayNavigationView.swift */,
+				F4F26A01284133B70081A499 /* LoadCapacityPredictionView.swift */,
 				F4F5274E283C285700AE1C13 /* ChartAndDataView.swift */,
+				F4F52754283D2EFF00AE1C13 /* ProfileView.swift */,
+				F4C88DA32844527400888164 /* GoalEditView.swift */,
+				F4C88DA12843C98800888164 /* InfoEditView.swift */,
+				F4F52752283C7B0100AE1C13 /* DayNavigationView.swift */,
+				F4C88DA72844658E00888164 /* CalendarPopoverView.swift */,
 				F4305DD62839C24F00DAF303 /* InputView.swift */,
 				F417262D2835EAF6007969E5 /* Assets.xcassets */,
 				F417262F2835EAF6007969E5 /* Preview Content */,
@@ -198,12 +130,25 @@
 		F4305DDB2839D03500DAF303 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F4305DDC2839D07200DAF303 /* Theme.swift */,
 				F4305DDE283B158200DAF303 /* Entry.swift */,
+				F4C88DAA28447DC100888164 /* Measurement.swift */,
 				F4F52756283D352300AE1C13 /* User.swift */,
 				F4593AF2283EC84A00CDCD62 /* Palette.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F4C88DA928446B5300888164 /* Not Used Anymore */ = {
+			isa = PBXGroup;
+			children = (
+				F4305DDC2839D07200DAF303 /* Theme.swift */,
+				F4305DE0283B1B0400DAF303 /* EntryView.swift */,
+				F46FC96D2842DB1100B85568 /* TestView.swift */,
+				F4593AF4283ECF1300CDCD62 /* QuoteView.swift */,
+				F4305DD82839C5D900DAF303 /* SummaryView.swift */,
+				F46FC9712842FB4900B85568 /* InfoEditDraftView.swift */,
+			);
+			path = "Not Used Anymore";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,13 +161,15 @@
 				F41726222835EAF5007969E5 /* Sources */,
 				F41726232835EAF5007969E5 /* Frameworks */,
 				F41726242835EAF5007969E5 /* Resources */,
-				0E3693E228432F7300AE26F0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Athlete Habit Tracker App SwiftUI";
+			packageProductDependencies = (
+				F46FC96B2842DAC300B85568 /* Popovers */,
+			);
 			productName = "Athlete Habit Tracker App SwiftUI";
 			productReference = F41726262835EAF5007969E5 /* Athlete Habit Tracker App SwiftUI.app */;
 			productType = "com.apple.product-type.application";
@@ -251,6 +198,9 @@
 				Base,
 			);
 			mainGroup = F417261D2835EAF4007969E5;
+			packageReferences = (
+				F46FC96A2842DAC300B85568 /* XCRemoteSwiftPackageReference "Popovers" */,
+			);
 			productRefGroup = F41726272835EAF5007969E5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,28 +227,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C88DA82844658E00888164 /* CalendarPopoverView.swift in Sources */,
+				F4F26A0428415B8E0081A499 /* EntryModalView.swift in Sources */,
+				F4C88DAB28447DC100888164 /* Measurement.swift in Sources */,
 				F4305DDF283B158200DAF303 /* Entry.swift in Sources */,
 				F4305DD72839C24F00DAF303 /* InputView.swift in Sources */,
 				F4F52755283D2EFF00AE1C13 /* ProfileView.swift in Sources */,
 				F4593AF3283EC84A00CDCD62 /* Palette.swift in Sources */,
-				0E3693E628433A6200AE26F0 /* TraceOptionsDataHelper.swift in Sources */,
 				F4305DD92839C5D900DAF303 /* SummaryView.swift in Sources */,
-				0EE95F30284209330051F40C /* DataHelperProtocol.swift in Sources */,
-				0EE95F2E284209330051F40C /* UserDataModel.swift in Sources */,
+				F4C88DA22843C98800888164 /* InfoEditView.swift in Sources */,
+				F46FC96E2842DB1100B85568 /* TestView.swift in Sources */,
 				F4305DDD2839D07200DAF303 /* Theme.swift in Sources */,
-				0E3693E42843389000AE26F0 /* TraceOptionsDataModel.swift in Sources */,
 				F4F52753283C7B0100AE1C13 /* DayNavigationView.swift in Sources */,
+				F4C88DAD2844863C00888164 /* EntryInputView.swift in Sources */,
 				F4305DE1283B1B0400DAF303 /* EntryView.swift in Sources */,
 				F4593AF5283ECF1300CDCD62 /* QuoteView.swift in Sources */,
-				0EE95F2F284209330051F40C /* UserinfoDataHelper.swift in Sources */,
 				F417262C2835EAF5007969E5 /* DailyView.swift in Sources */,
-				0E3693EA28433EC200AE26F0 /* TraceOptionsDetailDataHelper.swift in Sources */,
+				F4F26A02284133B70081A499 /* LoadCapacityPredictionView.swift in Sources */,
 				F417262A2835EAF5007969E5 /* Athlete_Habit_Tracker_App_SwiftUIApp.swift in Sources */,
+				F4702CC6284123180044B66D /* ContentView.swift in Sources */,
 				F4F5274F283C285700AE1C13 /* ChartAndDataView.swift in Sources */,
-				0E3693E828433DAF00AE26F0 /* TraceOptionsDetailDataModel.swift in Sources */,
 				F4F52757283D352300AE1C13 /* User.swift in Sources */,
-				0EE95F2D284209330051F40C /* SQLiteDataStore.swift in Sources */,
+				F4C88DA42844527400888164 /* GoalEditView.swift in Sources */,
 				F405460D283EE13E00D40FE1 /* RehabView.swift in Sources */,
+				F46FC9722842FB4900B85568 /* InfoEditDraftView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,17 +379,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Athlete Habit Tracker App SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
-					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
-					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
-				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Athlete Habit Tracker App SwiftUI/DataBase/SQLite\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -451,7 +394,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ydnzhg.Athlete-Habit-Tracker-App-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -465,16 +407,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Athlete Habit Tracker App SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
-					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
-					"$(PROJECT_DIR)/Athlete\\ Habit\\ Tracker\\ App\\ SwiftUI/DataBase",
-				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Athlete Habit Tracker App SwiftUI/DataBase/SQLite\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -488,7 +422,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ydnzhg.Athlete-Habit-Tracker-App-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -516,6 +449,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F46FC96A2842DAC300B85568 /* XCRemoteSwiftPackageReference "Popovers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aheze/Popovers";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F46FC96B2842DAC300B85568 /* Popovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F46FC96A2842DAC300B85568 /* XCRemoteSwiftPackageReference "Popovers" */;
+			productName = Popovers;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F417261E2835EAF4007969E5 /* Project object */;
 }
