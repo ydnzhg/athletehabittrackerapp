@@ -8,25 +8,21 @@
 import SwiftUI
 
 struct RehabView: View {
-    @State private var didWorkout = 1
-    @State private var partOfBody = 1
-    @State private var intensity = 0.0
-    @State private var sets = 0
-    @State private var pain = 0.0
+    
+    @Binding var workoutInfo: WorkoutInfo
 
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 10) {
+                WorkoutQuestion(selection: $workoutInfo.completed)
                 
+                BodyPartQuestion(selection: $workoutInfo.bodyPart)
                 
+                SetsAndIntensityQuestion(sets: $workoutInfo.sets, intensity: $workoutInfo.intensity)
                 
-                WorkoutQuestion(selection: $didWorkout)
+                PainQuestion(pain: $workoutInfo.pain)
                 
-                BodyPartQuestion(selection: $partOfBody)
-                
-                SetsAndIntensityQuestion(sets: $sets, intensity: $intensity)
-                
-                PainQuestion(pain: $pain)
+                Spacer()
             }
         }
     }
@@ -34,7 +30,7 @@ struct RehabView: View {
 
 struct RehabView_Previews: PreviewProvider {
     static var previews: some View {
-        RehabView()
+        RehabView(workoutInfo: .constant(WorkoutInfo.blankSampleData))
     }
 }
 
@@ -45,8 +41,8 @@ struct WorkoutQuestion: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(.highblue)
-                .padding()
-                .frame(width: 400, height: 135)
+                .padding(.horizontal)
+                .frame(width: 400, height: 100)
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
             VStack {
                 Text("Did you workout today?")
@@ -54,15 +50,14 @@ struct WorkoutQuestion: View {
                     .font(.title3.bold())
                     .padding(5)
                 Picker(selection: $selection, label: Text("Picker")) {
-                    Text("Yes").tag(0)
-                    Text("No").tag(1)
+                    Text("Yes").tag(1)
+                    Text("No").tag(0)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
             }
             .padding()
         }
-        .padding(.bottom, -15)
     }
 }
 
@@ -72,9 +67,9 @@ struct BodyPartQuestion: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .padding()
+                .padding(.horizontal)
                 .foregroundColor(.fusionred)
-                .frame(width: 400, height: 135)
+                .frame(width: 400, height: 100)
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
             VStack {
                 Text("Which body part did you workout?")
@@ -90,7 +85,6 @@ struct BodyPartQuestion: View {
             }
             .padding()
         }
-        .padding(.bottom, -15)
     }
 }
 
@@ -102,15 +96,14 @@ struct SetsAndIntensityQuestion: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(.reptilegreen)
-                .padding()
-                .frame(width: 400, height: 190)
+                .padding(.horizontal)
+                .frame(width: 400, height: 160)
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
             VStack {
                 Text("What was the number of sets and the intensity?")
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .font(.title3.bold())
-                    .padding(.top,5)
                 VStack {
                     HStack {
                         Text("\(sets) sets")
@@ -130,11 +123,9 @@ struct SetsAndIntensityQuestion: View {
                     }
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 5)
             }
             .padding()
         }
-        .padding(.bottom, -15)
     }
 }
 
@@ -146,8 +137,8 @@ struct PainQuestion: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(.orangehibiscus)
-                .padding()
-                .frame(width: 400, height: 135)
+                .padding(.horizontal)
+                .frame(width: 400, height: 100)
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
             VStack {
                 Text("How much pain were you in?")

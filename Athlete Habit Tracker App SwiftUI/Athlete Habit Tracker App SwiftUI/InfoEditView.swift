@@ -6,39 +6,44 @@
 //
 
 import SwiftUI
-struct InfoEditView: View {
-    @ObservedObject var user: UserInfoDataObject
-    //@State private var nameEx = ""
-    //@State private var genderEx = 0
-    //@State private var ageEx = 0.0
-    //@State private var heightFeetEx = 0
-    //@State private var heightInchesEx = 0
-    //@State private var weightEx = 0.0
-    //var  userData = UserInfoModel()
 
+struct InfoEditView: View {
+    
+    @Binding var userData: User.Data
+    
     var body: some View {
+        
         VStack(spacing: 20) {
-            NameTextField(image: "signature", placeholder: "Name", value: $user.userName)
-                .padding(.top, 10)
-            GenderPicker(image: "person.fill", label: "Gender", value: $user.gender)
-            AgeSlider(image: "calendar", label: "Age", units: "yrs", value: $user.age)
-            HeightPicker(image: "ruler.fill", label: "Height", value1: $user.heightFeetEx, value2: $user.heightInchesEx)
-            WeightSlider(image: "scalemass.fill", label: "Weight", units: "lbs", value: $user.weight)
+            
+            NameEditTextField(image: "signature", label: "Name: ", value: $userData.name)
+            
+            GenderPicker(image: "person.fill", label: "Gender: ", value: $userData.gender)
+            
+            InfoEditTextField(image: "calendar", placeholder: "Age: ", units: "yrs",value: $userData.age)
+            
+            InfoEditTextField(image: "ruler.fill", placeholder: "Height: ", units: "in", value: $userData.height)
+            
+            InfoEditTextField(image: "scalemass.fill", placeholder: "Weight: ", units: "lbs", value: $userData.weight)
+
             Spacer()
         }
+        .padding(.horizontal, 5)
     }
 }
+
 
 struct InfoEditView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoEditView(user:UserInfoDataObject())
+        InfoEditView(userData: .constant(User.sampleData.data))
     }
 }
 
-struct NameTextField: View {
+
+struct NameEditTextField: View {
     
     var image: String
-    var placeholder: String
+    var label: String
+    
     @Binding var value: String
     
     var body: some View {
@@ -49,7 +54,7 @@ struct NameTextField: View {
                 .foregroundColor(.white)
                 .background(Color.fusionred)
                 .clipShape(Circle())
-            TextField(placeholder, text: $value)
+            TextField(label, text: $value)
                 .padding()
                 .padding(.leading, 60)
                 .frame(height: 60)
@@ -77,14 +82,14 @@ struct GenderPicker: View {
                 .clipShape(Circle())
             HStack {
                 Text(label)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.black.opacity(0.7))
                 Spacer()
                 Picker(label, selection: $value) {
-                    Text("Choose").tag(0)
-                    Text("Male").tag(1)
-                    Text("Female").tag(2)
+                    Text("Male").tag(0)
+                    Text("Female").tag(1)
                 }
-                .pickerStyle(MenuPickerStyle())
+                .frame(width: 135)
+                .pickerStyle(SegmentedPickerStyle())
             }
             .padding()
             .padding(.leading, 60)
@@ -97,6 +102,56 @@ struct GenderPicker: View {
         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
     }
 }
+
+struct InfoEditTextField: View {
+    
+    var image: String
+    var placeholder: String
+    var units: String
+    
+    @Binding var value: Int
+    
+    var body: some View {
+        ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
+            Image(systemName: image)
+                .font(.system(size: 25))
+                .frame(width: 60, height: 60)
+                .foregroundColor(.white)
+                .background(Color.fusionred)
+                .clipShape(Circle())
+            HStack {
+                Text(placeholder)
+                    .foregroundColor(Color.black.opacity(0.7))
+                Spacer()
+                TextField("info", value: $value, format: .number)
+                    .font(.body.bold())
+                    .foregroundColor(.highblue)
+                    .frame(width: 30)
+                Text(units)
+                    .foregroundColor(Color.black.opacity(0.7))
+                    .padding(.trailing,10)
+                    .frame(width: 40)
+            }
+            .padding()
+            .padding(.leading, 60)
+            .frame(height: 60)
+            .background(Color.bluegrey.opacity(0.1))
+            .clipShape(Capsule())
+        }
+        .padding(.horizontal)
+        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+    }
+}
+
+/*
+NameTextField(image: "signature", placeholder: "Name", value: $userData.name)
+    .padding(.top, 10)
+GenderPicker(image: "person.fill", label: "Gender", value: $userData.gender)
+AgeSlider(image: "calendar", label: "Age", units: "yrs", value: $userData.age)
+HeightPicker(image: "ruler.fill", label: "Height", value: $userData.height)
+WeightSlider(image: "scalemass.fill", label: "Weight", units: "lbs", value: $userData.weight)
+
+
 
 struct AgeSlider: View {
     
@@ -115,7 +170,7 @@ struct AgeSlider: View {
                 .clipShape(Circle())
             HStack {
                 Text(label)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.black.opacity(0.7))
                 Spacer(minLength: 30)
                 Slider(value: $value, in: 0...100, step: 1) {
                     Text("years")
@@ -139,8 +194,8 @@ struct HeightPicker: View {
     
     var image: String
     var label: String
-    @Binding var value1: Int
-    @Binding var value2: Int
+    
+    @Binding var value: Int
     
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
@@ -152,18 +207,9 @@ struct HeightPicker: View {
                 .clipShape(Circle())
             HStack {
                 Text("Height")
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.black.opacity(0.7))
                 Spacer()
-                Picker("Feet", selection: $value1) {
-                    Text("Choose").tag(0)
-                    ForEach(1..<9) { num in
-                        Text("\(num)").tag("\(num)")
-                    }
-                }
-                .pickerStyle(MenuPickerStyle())
-                Text("ft")
-                    .foregroundColor(Color.gray)
-                Picker("Inches", selection: $value2) {
+                Picker("Inches", selection: $value) {
                     Text("Choose").tag(0)
                     ForEach(0..<12) { num in
                         Text("\(num)").tag("\(num)")
@@ -202,7 +248,7 @@ struct WeightSlider: View {
                 .clipShape(Circle())
             HStack {
                 Text(label)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.black.opacity(0.7))
                 Spacer(minLength: 10)
                 Slider(value: $value, in: 0...300, step: 5) {
                     Text("years")
@@ -221,3 +267,4 @@ struct WeightSlider: View {
         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
     }
 }
+*/

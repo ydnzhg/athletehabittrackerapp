@@ -10,74 +10,85 @@ import SwiftUI
 
 struct DailyView: View {
     
-    @Binding var isPresentingInfoEditView: Bool
-    @State var isPresentingSleepModalView = false
-    @State var isPresentingHydrationModalView = false
-    @State var isPresentingProteinModalView = false
-    @State var isPresentingCalorieModalView = false
-    @State var isPresentingStretchingModalView = false
-    @State var isPresentingWorkoutModalView = false
-    @State var isPresentingWeightModalView = false
-    @State var isPresentingHeartRateModalView = false
-
-    @State var isPresentingEntryInputView = false
-    @ObservedObject var traceOptionsObject = TraceOptionsDataObject(detail: true, date: Date())
-    //let entries: [Entry]
-   // let measurements: [Measurement]
+    @State var isPresentingTrainingHabitInputView = false
+    
+    @Binding var trainingHabits: [TrainingHabit]
+    let measurements: [Measurement]
     
     var columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: 2)
     
     var body: some View {
-        VStack {
             // if values are inputted, card will light up
             // if havent inputted yet, card will be grey
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 20) {
                     
-                    EntryCardView(isPresentingModalView: $isPresentingSleepModalView, entry: traceOptionsObject.optionsArray[0])
-                    EntryCardView(isPresentingModalView: $isPresentingHydrationModalView, entry: traceOptionsObject.optionsArray[1])
-                    EntryCardView(isPresentingModalView: $isPresentingProteinModalView, entry: traceOptionsObject.optionsArray[2])
-                    EntryCardView(isPresentingModalView: $isPresentingCalorieModalView, entry: traceOptionsObject.optionsArray[3])
-                    EntryCardView(isPresentingModalView: $isPresentingStretchingModalView, entry: traceOptionsObject.optionsArray[4])
-                    EntryCardView(isPresentingModalView: $isPresentingWorkoutModalView, entry: traceOptionsObject.optionsArray[5])
-                    MeasurementCardView(isPresentingModalView: $isPresentingWeightModalView, measurement: traceOptionsObject.optionsArray[6])
-                    MeasurementCardView(isPresentingModalView: $isPresentingHeartRateModalView, measurement: traceOptionsObject.optionsArray[7])
-
-                    
-                    // example of a card with no input yet
-                    ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
-                        VStack(alignment: .leading, spacing: 15) {
-                            Text("Example")
-                                .foregroundColor(.white)
-                            
-                            Text("...")
-                                .font(.title.bold())
-                                .foregroundColor(.white)
-                    
-                            HStack {
-                                Text("Goal: 100")
+                ForEach($trainingHabits) { $trainingHabit in
+                    NavigationLink(destination: TrainingHabitView(trainingHabit: $trainingHabit)) {
+                        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
+                            VStack(alignment: .leading, spacing: 15) {
+                                Text("\(trainingHabit.title)")
                                     .foregroundColor(.white)
-                                Spacer(minLength: 0)
-
+                                    
+                                Text("\(trainingHabit.today) \(trainingHabit.shortUnits)")
+                                    .font(.title.bold())
+                                    .foregroundColor(.white)
+                                    
+                                HStack {
+                                    Text("Goal: \(trainingHabit.goal) \(trainingHabit.units)")
+                                        .foregroundColor(.white)
+                                        .font(.subheadline)
+                                    Spacer(minLength: 0)
+                                        
+                                }
                             }
-                        }
-                        .padding()
-                        .background(Color.twinkleblue)
-                        .cornerRadius(20)
-                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                        
-                        Image(systemName: "person.fill")
                             .padding()
-                            .foregroundColor(.white)
+                            .background(trainingHabit.today != 0 ? trainingHabit.palette.mainColor : .twinkleblue)
+                            .cornerRadius(20)
+                            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                                
+                            Image(systemName: "\(trainingHabit.icon)")
+                                .padding()
+                                .foregroundColor(.white)
+                        }
                     }
                 }
-                .padding(.horizontal)
-                .padding(.top,5)
+                    
+                    // example of a card with no input yet
+                /*
+                ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text("Example")
+                            .foregroundColor(.white)
+                            
+                        Text("...")
+                            .font(.title.bold())
+                            .foregroundColor(.white)
+                    
+                        HStack {
+                            Text("Goal: 100")
+                                .foregroundColor(.white)
+                            Spacer(minLength: 0)
+
+                        }
+                    }
+                    .padding()
+                    .background(Color.twinkleblue)
+                    .cornerRadius(20)
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                        
+                    Image(systemName: "person.fill")
+                        .padding()
+                        .foregroundColor(.white)
+                }
+                */
             }
+            .padding(.horizontal)
+            .padding(.top,5)
         }
         .overlay(
                 Button(action: {
-                    isPresentingEntryInputView = true
+                    isPresentingTrainingHabitInputView = true
                 }) {
                     Image(systemName: "pencil")
                 }
@@ -89,20 +100,19 @@ struct DailyView: View {
                     .padding()
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
                 , alignment: .bottomTrailing)
-        .sheet(isPresented: $isPresentingEntryInputView) {
+        .sheet(isPresented: $isPresentingTrainingHabitInputView) {
             NavigationView {
-                EntryInputView(traceOptionsObject:traceOptionsObject)
-                    .navigationTitle("Input Info")
+                TrainingHabitInputView(trainingHabits: $trainingHabits, measurements: measurements)
+                    .navigationTitle("Input Today's Info")
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
-                                isPresentingEntryInputView = false
+                                isPresentingTrainingHabitInputView = false
                             }
                         }
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
-                                traceOptionsObject.commitToOptionsDetailDB()
-                                isPresentingEntryInputView = false
+                                isPresentingTrainingHabitInputView = false
                             }
                         }
                     }
@@ -111,25 +121,40 @@ struct DailyView: View {
     }
 }
 
-//struct DailyView_Previews: PreviewProvider {
-  //  static var previews: some View {
-  //      DailyView(isPresentingInfoEditView: .constant(true), entries: Entry.sampleData, measurements: Measurement.sampleData)
-  //  }
-//}
-
-func recoveryScoreCalculation() -> Int {
-    var total: Int = 0
-    for entry in Entry.sampleData {
-        total += Int((Double(entry.lastWeek[0]) / Double(entry.goal)) * Double(100))
+struct DailyView_Previews: PreviewProvider {
+    static var previews: some View {
+        DailyView(trainingHabits: .constant(TrainingHabit.sampleData), measurements: Measurement.sampleData)
     }
-    return total / Entry.sampleData.count
 }
+
+/*
+@Binding var isPresentingInfoEditView: Bool
+@State var isPresentingSleepModalView = false
+@State var isPresentingHydrationModalView = false
+@State var isPresentingProteinModalView = false
+@State var isPresentingCalorieModalView = false
+@State var isPresentingStretchingModalView = false
+@State var isPresentingWorkoutModalView = false
+@State var isPresentingWeightModalView = false
+@State var isPresentingHeartRateModalView = false
+*/
+
+/*
+EntryCardView(isPresentingModalView: $isPresentingSleepModalView, entry: entries[0])
+EntryCardView(isPresentingModalView: $isPresentingHydrationModalView, entry: entries[1])
+EntryCardView(isPresentingModalView: $isPresentingProteinModalView, entry: entries[2])
+EntryCardView(isPresentingModalView: $isPresentingCalorieModalView, entry: entries[3])
+EntryCardView(isPresentingModalView: $isPresentingStretchingModalView, entry: entries[4])
+EntryCardView(isPresentingModalView: $isPresentingWorkoutModalView, entry: entries[5])
+MeasurementCardView(isPresentingModalView: $isPresentingWeightModalView, measurement: measurements[0])
+MeasurementCardView(isPresentingModalView: $isPresentingHeartRateModalView, measurement: measurements[1])
+
 
 struct EntryCardView: View {
     
     @Binding var isPresentingModalView: Bool
     
-    var entry: TraceOptionsDataModel
+    var entry: Entry
     
     var body: some View {
         Button(action: {
@@ -140,12 +165,12 @@ struct EntryCardView: View {
                     Text("\(entry.title)")
                         .foregroundColor(.white)
                     
-                    Text("\(entry.getDetailScore(date: Date())) \(entry.unit)")
+                    Text("\(entry.lastWeek[0]) \(entry.units)")
                         .font(.title.bold())
                         .foregroundColor(.white)
                     
                     HStack {
-                        Text("Goal: \(entry.goal) \(entry.unit)")
+                        Text("Goal: \(entry.goal) \(entry.units)")
                             .foregroundColor(.white)
                             .font(.subheadline)
                         Spacer(minLength: 0)
@@ -172,7 +197,7 @@ struct MeasurementCardView: View {
     
     @Binding var isPresentingModalView: Bool
     
-    var measurement: TraceOptionsDataModel
+    var measurement: Measurement
     
     var body: some View {
         Button(action: {
@@ -188,7 +213,7 @@ struct MeasurementCardView: View {
                         .foregroundColor(.white)
                     
                     HStack {
-                        Text("Goal: \(measurement.goal) \(measurement.unit)")
+                        Text("Goal: \(measurement.goal) \(measurement.units)")
                             .foregroundColor(.white)
                             .font(.subheadline)
                         Spacer(minLength: 0)
@@ -210,3 +235,4 @@ struct MeasurementCardView: View {
         }
     }
 }
+*/

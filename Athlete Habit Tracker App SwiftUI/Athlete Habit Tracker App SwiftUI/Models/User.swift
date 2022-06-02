@@ -10,16 +10,18 @@ import Foundation
 struct User {
     var name: String
     // true for male false for female
-    var gender: Bool
+    var gender: Int
+    var age: Int
     // inches
     var height: Int
     // pounds
     var weight: Int
     var profilePicture: String
     
-    init(name: String, gender: Bool, height: Int, weight: Int, profilePicture: String) {
+    init(name: String, gender: Int, age: Int, height: Int, weight: Int, profilePicture: String) {
         self.name = name
         self.gender = gender
+        self.age = age
         self.height = height
         self.weight = weight
         self.profilePicture = profilePicture
@@ -27,5 +29,28 @@ struct User {
 }
 
 extension User {
-    static let sampleData: User = User(name: "Andy Zhang", gender: true, height: 71, weight: 165, profilePicture: "placeholderpfp")
+    struct Data {
+        var name: String = "Bob"
+        var gender: Int = 0
+        var age: Int = 25
+        var height: Int = 70
+        var weight: Int = 150
+        var profilePicture: String = "placeholderpfp"
+    }
+    
+    var data: Data {
+        Data(name: name, gender: gender, age: age, height: height, weight: weight, profilePicture: profilePicture)
+    }
+    
+    mutating func update(from data: Data) {
+        name = data.name
+        gender = data.gender
+        age = data.age
+        height = data.height
+        weight = data.weight
+    }
+}
+
+extension User {
+    static let sampleData: User = User(name: "Andy Zhang", gender: 0, age: 17, height: 71, weight: 165, profilePicture: "placeholderpfp")
 }

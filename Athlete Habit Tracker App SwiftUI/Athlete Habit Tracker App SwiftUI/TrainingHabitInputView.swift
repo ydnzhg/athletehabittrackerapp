@@ -1,60 +1,53 @@
 //
-//  GoalEditView.swift
+//  TrainingHabitInputView.swift
 //  Athlete Habit Tracker App SwiftUI
 //
-//  Created by Zhang, Xiaodong on 5/29/22.
+//  Created by Zhang, Xiaodong on 5/30/22.
 //
 
 import SwiftUI
 
-struct GoalEditView: View {
+struct TrainingHabitInputView: View {
     
     @Binding var trainingHabits: [TrainingHabit]
     let measurements: [Measurement]
-    
-    @State private var sleepGoal = 0
-    @State private var hydrationGoal = 0
-    @State private var proteinGoal = 0
-    @State private var calorieGoal = 0
-    @State private var stretchingGoal = 0
-    @State private var workoutGoal = 0
-    @State private var weightGoal = 0
-    @State private var heartrateGoal = 0
 
+    @State private var currentWeight = 0
+    @State private var currentHeartRate = 0
     
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
                 ForEach($trainingHabits) { $trainingHabit in
-                    TrainingHabitGoalTextField(trainingHabit: $trainingHabit)
+                    TrainingHabitInputTextField(trainingHabit: $trainingHabit, placeholder: "\(trainingHabit.title)")
                 }
+                /*
+                TrainingHabitInputTextField(trainingHabit: trainingHabits[0], placeholder: "Hours of Sleep", value: $sleep)
+                TrainingHabitInputTextField(trainingHabit: trainingHabits[1], placeholder: "Amount of Water", value: $drink)
+                TrainingHabitInputTextField(trainingHabit: trainingHabits[2], placeholder: "Protein Consumed", value: $protein)
+                TrainingHabitInputTextField(trainingHabit: trainingHabits[3], placeholder: "Calories Consumed", value: $calories)
+                TrainingHabitInputTextField(trainingHabit: trainingHabits[4], placeholder: "Stretching Time", value: $stretch)
+                TrainingHabitInputTextField(trainingHabit: trainingHabits[5], placeholder: "Workout Time", value: $workout)
+                */
+                MeasurementInputTextField(measurement: measurements[0], placeholder: "Current Weight", value: $currentWeight)
+                MeasurementInputTextField(measurement: measurements[1], placeholder: "Current Heart Rate", value: $currentHeartRate)
+                
+                Spacer()
             }
         }
-        
-        /*
-        VStack(spacing: 15) {
-            EntryGoalTextField(entry: entries[0], placeholder: "Sleep Goal", value: $sleepGoal)
-            EntryGoalTextField(entry: entries[1], placeholder: "Hydration Goal", value: $hydrationGoal)
-            EntryGoalTextField(entry: entries[2], placeholder: "Protein Goal", value: $proteinGoal)
-            EntryGoalTextField(entry: entries[3], placeholder: "Calorie Goal", value: $calorieGoal)
-            EntryGoalTextField(entry: entries[4], placeholder: "Stretching Goal", value: $stretchingGoal)
-            EntryGoalTextField(entry: entries[5], placeholder: "Workout Goal", value: $workoutGoal)
-            MeasurementGoalTextField(measurement: measurements[0], placeholder: "Weight Goal", value: $weightGoal)
-            MeasurementGoalTextField(measurement: measurements[1], placeholder: "Heart Rate Goal", value: $heartrateGoal)
-        }
-         */
     }
 }
 
-struct GoalEditView_Previews: PreviewProvider {
+struct TrainingHabitInputView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalEditView(trainingHabits: .constant(TrainingHabit.sampleData), measurements: Measurement.sampleData)
+        TrainingHabitInputView(trainingHabits: .constant(TrainingHabit.sampleData), measurements: Measurement.sampleData)
     }
 }
 
-struct TrainingHabitGoalTextField: View {
+struct TrainingHabitInputTextField: View {
     
     @Binding var trainingHabit: TrainingHabit
+    var placeholder: String
     
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
@@ -65,10 +58,10 @@ struct TrainingHabitGoalTextField: View {
                 .background(trainingHabit.palette.mainColor)
                 .clipShape(Circle())
             HStack {
-                Text("\(trainingHabit.title) Goal:")
+                Text("\(placeholder): ")
                     .foregroundColor(Color.black.opacity(0.7))
                 Spacer()
-                TextField("\(trainingHabit.units)", value: $trainingHabit.goal, format: .number)
+                TextField("\(trainingHabit.units)", value: $trainingHabit.today, format: .number)
                     .font(.body.bold())
                     .foregroundColor(.highblue)
                     .frame(width: 100)
@@ -84,7 +77,7 @@ struct TrainingHabitGoalTextField: View {
     }
 }
 
-struct MeasurementGoalTextField: View {
+struct MeasurementInputTextField: View {
     
     var measurement: Measurement
     var placeholder: String

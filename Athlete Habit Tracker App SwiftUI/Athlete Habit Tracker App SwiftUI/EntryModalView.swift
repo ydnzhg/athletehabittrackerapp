@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EntryModalView: View {
         
-    let entry: TraceOptionsDataModel
+    let entry: TrainingHabit
     
     func barHeightCalculation(day: Int) -> Int {
         return Int((Double(entry.lastWeek[day]) / Double(entry.goal)) * Double(75))
@@ -39,7 +39,7 @@ struct EntryModalView: View {
 
                     HStack {
                         HStack {
-                            Text("Daily Goal: \(entry.goal) \(entry.unit)")
+                            Text("Daily Goal: \(entry.goal) \(entry.units)")
                                 .foregroundColor(.white)
                                 .font(.subheadline.bold())
                             Spacer(minLength: 0)
@@ -70,11 +70,11 @@ struct EntryModalView: View {
     }
 }
 
-//struct HabitEntryModalView_Previews: PreviewProvider {
-    //static var previews: some View {
-    //    EntryModalView(entry: Entry.sampleData[0])
-  //  }
-//}
+struct HabitEntryModalView_Previews: PreviewProvider {
+    static var previews: some View {
+        EntryModalView(entry: TrainingHabit.sampleData[0])
+    }
+}
 
 struct BarView: View {
     var value: Int
@@ -99,7 +99,7 @@ struct BarView: View {
 
 struct MeasurementModalView: View {
         
-    let measurement: TraceOptionsDataModel
+    let measurement: Measurement
     
     func barHeightCalculation(day: Int) -> Int {
         return Int((Double(measurement.lastWeek[day]) / Double(measurement.goal)) * Double(75))
@@ -129,7 +129,7 @@ struct MeasurementModalView: View {
 
                     HStack {
                         HStack {
-                            Text("Daily Goal: \(measurement.goal) \(measurement.unit)")
+                            Text("Daily Goal: \(measurement.goal) \(measurement.units)")
                                 .foregroundColor(.white)
                                 .font(.subheadline.bold())
                             Spacer(minLength: 0)

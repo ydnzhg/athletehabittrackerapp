@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ChartAndDataView: View {
     
-    let entries: [Entry]
+    let entries: [TrainingHabit]
     
     let exampleDates = ["5/1", "5/2", "5/3", "5/4", "5/5", "5/6", "5/7"]
         
@@ -27,12 +27,12 @@ struct ChartAndDataView: View {
                     Spacer()
                     
                     Picker(selection: $selectedEntry, label: Text("")) {
-                        Text("\(Entry.sampleData[0].title)").tag(0)
-                        Text("\(Entry.sampleData[1].title)").tag(1)
-                        Text("\(Entry.sampleData[2].title)").tag(2)
-                        Text("\(Entry.sampleData[3].title)").tag(3)
-                        Text("\(Entry.sampleData[4].title)").tag(4)
-                        Text("\(Entry.sampleData[5].title)").tag(5)
+                        Text("\(TrainingHabit.sampleData[0].title)").tag(0)
+                        Text("\(TrainingHabit.sampleData[1].title)").tag(1)
+                        Text("\(TrainingHabit.sampleData[2].title)").tag(2)
+                        Text("\(TrainingHabit.sampleData[3].title)").tag(3)
+                        Text("\(TrainingHabit.sampleData[4].title)").tag(4)
+                        Text("\(TrainingHabit.sampleData[5].title)").tag(5)
                     }
                     .padding(.horizontal)
                     .background(Color.bluegrey.opacity(0.15))
@@ -63,10 +63,10 @@ struct ChartAndDataView: View {
                             Text("\(exampleDates[num])")
                                 .font(.body.bold())
                             Spacer()
-                            Text("\(Entry.sampleData[selectedEntry].lastWeek[num])")
+                            Text("\(TrainingHabit.sampleData[selectedEntry].lastWeek[num])")
                                 .font(.body.bold())
                                 .foregroundColor(.highblue)
-                            Text("\(Entry.sampleData[selectedEntry].units)")
+                            Text("\(TrainingHabit.sampleData[selectedEntry].units)")
                             Spacer()
                         }
                     }
@@ -78,7 +78,7 @@ struct ChartAndDataView: View {
 
 struct BarChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartAndDataView(entries: Entry.sampleData)
+        ChartAndDataView(entries: TrainingHabit.sampleData)
     }
 }
  
@@ -108,5 +108,5 @@ struct BarView2: View {
 }
 
 func barHeightCalculation(entry: Int, day: Int) -> Int {
-    return Int((Double(Entry.sampleData[entry].lastWeek[day]) / Double(Entry.sampleData[entry].goal)) * 150)
+    return Int((Double(TrainingHabit.sampleData[entry].lastWeek[day]) / Double(TrainingHabit.sampleData[entry].goal)) * 150)
 }

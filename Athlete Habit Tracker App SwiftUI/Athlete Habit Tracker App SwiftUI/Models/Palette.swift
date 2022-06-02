@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Palette: String, CaseIterable, Identifiable, ShapeStyle {
-    case blue
+    case royalblue
     case bluegrey
     case bluehorizon
     case flirtacious
@@ -23,7 +23,7 @@ enum Palette: String, CaseIterable, Identifiable, ShapeStyle {
     
     var accentColor: Color {
         switch self {
-        case .blue, .bluegrey, .bluehorizon, .flirtacious, .fusionred, .gloomypurple, .highblue, .lighterpurple, .maximumbluegreen, .orangehibiscus, .reptilegreen, .twinkleblue: return .white
+        case .royalblue, .bluegrey, .bluehorizon, .flirtacious, .fusionred, .gloomypurple, .highblue, .lighterpurple, .maximumbluegreen, .orangehibiscus, .reptilegreen, .twinkleblue: return .white
         }
     }
     var mainColor: Color {
@@ -39,7 +39,7 @@ enum Palette: String, CaseIterable, Identifiable, ShapeStyle {
 }
 
 extension Color {
-    static let blue = Color("blue")
+    static let royalblue = Color("royalblue")
     static let bluegrey = Color("bluegrey")
     static let bluehorizon = Color("bluehorizon")
     static let flirtacious = Color("flirtacious")
