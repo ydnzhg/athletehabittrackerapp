@@ -13,7 +13,7 @@ struct ProfileView: View {
     @State private var isPresentingGoalEditView = false
     @State private var isPresentingQuoteEditView = false
 
-
+    @ObservedObject var traceOptionsObject = TraceOptionsDataObject()
     let user: User
 
     var body: some View {
@@ -65,7 +65,7 @@ struct ProfileView: View {
                 }
                 .sheet(isPresented: $isPresentingInfoEditView) {
                     NavigationView {
-                        InfoEditView()
+                        InfoEditView(user: UserInfoDataObject())
                             .navigationTitle("Edit Info")
                             .toolbar {
                                 ToolbarItem(placement: .cancellationAction) {
@@ -92,7 +92,7 @@ struct ProfileView: View {
                 }
                 .sheet(isPresented: $isPresentingGoalEditView) {
                     NavigationView {
-                        GoalEditView(entries: Entry.sampleData, measurements: Measurement.sampleData)
+                        GoalEditView(traceOptionsObject:traceOptionsObject)
                             .navigationTitle("Change Goals")
                             .toolbar {
                                 ToolbarItem(placement: .cancellationAction) {
@@ -102,6 +102,7 @@ struct ProfileView: View {
                                 }
                                 ToolbarItem(placement: .confirmationAction) {
                                     Button("Done") {
+                                        traceOptionsObject.commitToOptionsDB()
                                         isPresentingGoalEditView = false
                                     }
                                 }

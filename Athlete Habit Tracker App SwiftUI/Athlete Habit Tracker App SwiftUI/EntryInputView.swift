@@ -9,41 +9,41 @@ import SwiftUI
 
 struct EntryInputView: View {
     
-    let entries: [Entry]
-    let measurements: [Measurement]
-    
-    @State private var sleep = 0
-    @State private var drink = 0
-    @State private var protein = 0
-    @State private var calories = 0
-    @State private var stretch = 0
-    @State private var workout = 0
-    @State private var currentWeight = 0
-    @State private var currentHeartRate = 0
+    //let entries: [Entry]
+    //let measurements: [Measurement]
+    @ObservedObject var traceOptionsObject : TraceOptionsDataObject
+    //@State private var sleep = 0
+    //@State private var drink = 0
+    //@State private var protein = 0
+   // @State private var calories = 0
+   // @State private var stretch = 0
+    //@State private var workout = 0
+   // @State private var currentWeight = 0
+   // @State private var currentHeartRate = 0
     
     var body: some View {
         VStack(spacing: 15) {
-            EntryTextField(entry: entries[0], placeholder: "Hours of Sleep", value: $sleep)
-            EntryTextField(entry: entries[1], placeholder: "Amount of Water", value: $drink)
-            EntryTextField(entry: entries[2], placeholder: "Protein Consumed", value: $protein)
-            EntryTextField(entry: entries[3], placeholder: "Calories Consumed", value: $calories)
-            EntryTextField(entry: entries[4], placeholder: "Stretching Time", value: $stretch)
-            EntryTextField(entry: entries[5], placeholder: "Workout Time", value: $workout)
-            MeasurementTextField(measurement: measurements[0], placeholder: "Current Weight", value: $currentWeight)
-            MeasurementTextField(measurement: measurements[1], placeholder: "Current Heart Rate", value: $currentHeartRate)
+            EntryTextField(entry: traceOptionsObject.optionsArray[0], placeholder: "Hours of Sleep", value: $traceOptionsObject.sleep)
+            EntryTextField(entry: traceOptionsObject.optionsArray[1], placeholder: "Amount of Water", value: $traceOptionsObject.hydration)
+            EntryTextField(entry: traceOptionsObject.optionsArray[2], placeholder: "Protein Consumed", value: $traceOptionsObject.protein)
+            EntryTextField(entry: traceOptionsObject.optionsArray[3], placeholder: "Calories Consumed", value: $traceOptionsObject.calorie)
+            EntryTextField(entry: traceOptionsObject.optionsArray[4], placeholder: "Stretching Time", value: $traceOptionsObject.stretching)
+            EntryTextField(entry: traceOptionsObject.optionsArray[5], placeholder: "Workout Time", value: $traceOptionsObject.workout)
+            MeasurementTextField(measurement: traceOptionsObject.optionsArray[6], placeholder: "Current Weight", value:$traceOptionsObject.weight)
+            MeasurementTextField(measurement: traceOptionsObject.optionsArray[7], placeholder: "Current Heart Rate", value: $traceOptionsObject.heartrate)
         }
     }
 }
 
 struct EntryInputView_Previews: PreviewProvider {
     static var previews: some View {
-        EntryInputView(entries: Entry.sampleData, measurements: Measurement.sampleData)
+        EntryInputView(traceOptionsObject:TraceOptionsDataObject())
     }
 }
 
 struct EntryTextField: View {
     
-    var entry: Entry
+    var entry: TraceOptionsDataModel
     var placeholder: String
 
     @Binding var value: Int
@@ -60,7 +60,7 @@ struct EntryTextField: View {
                 Text("\(placeholder): ")
                     .foregroundColor(.gray)
                 Spacer()
-                TextField("\(entry.units)", value: $value, format: .number)
+                TextField("\(entry.unit)", value: $value, format: .number)
                     .frame(width: 100)
             }
             .padding()
@@ -76,7 +76,7 @@ struct EntryTextField: View {
 
 struct MeasurementTextField: View {
     
-    var measurement: Measurement
+    var measurement: TraceOptionsDataModel
     var placeholder: String
 
     @Binding var value: Int
@@ -93,7 +93,7 @@ struct MeasurementTextField: View {
                 Text("\(placeholder): ")
                     .foregroundColor(.gray)
                 Spacer()
-                TextField("\(measurement.units)", value: $value, format: .number)
+                TextField("\(measurement.unit)", value: $value, format: .number)
                     .frame(width: 100)
             }
             .padding()

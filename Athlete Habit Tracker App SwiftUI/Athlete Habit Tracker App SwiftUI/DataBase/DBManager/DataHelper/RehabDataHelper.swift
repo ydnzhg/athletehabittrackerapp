@@ -1,27 +1,29 @@
 //
-//  TraceOptionsDataHelper.swift
+//  RehabDataHelper.swift
 //  Athlete Habit Tracker App SwiftUI
 //
-//  Created by 叶建锋 on 2022/5/29.
+//  Created by 叶建锋 on 2022/6/1.
 //
 
 import Foundation
+
 import SQLite
 
-class TraceOptionsDataHelper: DataHelperProtocol {
+class RehabDataHelper: DataHelperProtocol {
 
-    static let TABLE_NAME = "user_trace_options"
+    static let TABLE_NAME = "user_reha_data"
     
     static let dataID = Expression<Int>("id")
-    static let title = Expression<String>("title")
-    static let goal = Expression<Int>("goal")
-    static let unit = Expression<String>("unit")
-    static let shortUnits = Expression<String>("shortUnits")
-    static let icon = Expression<String>("icon")
+    static let didWorkout = Expression<Int>("didWorkout")
+    static let partOfBody = Expression<Int>("partOfBody")
+    static let intensity = Expression<Double>("intensity")
+    static let sets = Expression<Int>("sets")
+    static let pain = Expression<Double>("pain")
+    static let createTime = Expression<String>("createTime")
     
     static let table = Table(TABLE_NAME)
     
-    typealias T = TraceOptionsDataModel
+    typealias T = RehabDataModel
     
     static func createTable() throws {
 
@@ -31,45 +33,25 @@ class TraceOptionsDataHelper: DataHelperProtocol {
         do {
             _ = try DB.run( table.create(ifNotExists: true) {t in
                 t.column(dataID)
-                t.column(title)
-                t.column(goal)
-                t.column(unit)
-                t.column(shortUnits)
-                t.column(icon)
+                t.column(didWorkout)
+                t.column(partOfBody)
+                t.column(intensity)
+                t.column(sets)
+                t.column(pain)
+                t.column(createTime)
             })
-            try self.initData()
         } catch _ {
             throw DataAccessError.datastoreConnectionError
         }
-        
     }
-    static func initData() throws -> Void
-    {
-        do {
-            let rowId = try self.getNewId()
-            if(rowId > 1)
-            {
-                return;
-            }
-            var res = try insert(item: TraceOptionsDataModel(dataID: 1, title: "Sleep",goal: 8,unit: "hours",shortUnits: "h",icon: "powersleep"))
-            res = try insert(item: TraceOptionsDataModel(dataID: 2, title: "Hydration",goal: 64,unit: "oz",shortUnits: "h",icon: "drop.fill"))
-            res = try insert(item: TraceOptionsDataModel(dataID: 3, title: "Protein Intake",goal: 160,unit: "grams",shortUnits: "g",icon: "fork.knife"))
-            res = try insert(item: TraceOptionsDataModel(dataID: 4, title: "Calorie Intake",goal: 2300,unit: "cal",shortUnits: "c",icon: "bolt.fill"))
-            res = try insert(item: TraceOptionsDataModel(dataID: 5, title: "Stretching",goal: 15,unit: "min",shortUnits: "m",icon: "stopwatch.fill"))
-            res = try insert(item: TraceOptionsDataModel(dataID: 6, title: "Workout",goal: 60,unit: "min",shortUnits: "m",icon: "figure.walk"))
-            res = try insert(item: TraceOptionsDataModel(dataID: 7, title: "Weight",goal: 160,unit: "pounds",shortUnits: "1bs",icon: "scalemass.fill"))
-            res = try insert(item: TraceOptionsDataModel(dataID: 8, title: "Heart Rate",goal: 50,unit: "bpm",shortUnits: "bpm",icon: "heart.fill"))
-        }catch _ {
-            throw DataAccessError.datastoreConnectionError
-        }
-    }
+    
     static func insert(item: T) throws -> Int {
 
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
             throw DataAccessError.datastoreConnectionError
         }
         
-        let insert = table.insert(dataID <- item.dataID, title <- item.title, goal <- item.goal,unit <- item.unit,shortUnits <- item.shortUnits,icon <- item.icon)
+        let insert = table.insert(dataID <- item.dataID, didWorkout <- item.didWorkout, partOfBody <- item.partOfBody,intensity <- item.intensity,sets <- item.sets,pain <- item.pain,createTime <- item.createTime)
         do {
             let rowId = try DB.run(insert)
             guard rowId >= 0 else {
@@ -89,10 +71,11 @@ class TraceOptionsDataHelper: DataHelperProtocol {
 
         let query = table.filter(item.dataID == dataID)
 
-        if try DB.run(query.update(dataID <- item.dataID, title <- item.title, goal <- item.goal,unit <- item.unit,shortUnits <- item.shortUnits,icon <- item.icon)) > 0 {
+        if try DB.run(query.update(dataID <- item.dataID, didWorkout <- item.didWorkout, partOfBody <- item.partOfBody,intensity <- item.intensity,sets <- item.sets,pain <- item.pain,createTime <- item.createTime)) > 0 {
             return true
         } else {
-            return false
+            let res = try self.insert(item: item )
+            return res > 0
         }
 
     }
@@ -139,13 +122,31 @@ class TraceOptionsDataHelper: DataHelperProtocol {
         var retArray = [T]()
         for item in  items {
             
-            retArray.append(TraceOptionsDataModel(dataID: item[dataID], title: item[title],goal: item[goal],unit: item[unit],shortUnits: item[shortUnits],icon: item[icon]))
+            retArray.append(RehabDataModel(dataID: item[dataID], didWorkout: item[didWorkout],partOfBody: item[partOfBody],intensity: item[intensity],sets: item[sets],pain: item[pain],createTime: item[createTime]))
         }
         
         return retArray
         
     }
-    
+    static func findOneDay(date: Date) throws -> T {
+
+        guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
+            throw DataAccessError.datastoreConnectionError
+        }
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateStr = timeFormatter.string(from:date) as String
+        let query = table.filter(createTime == dateStr)
+        let items = try DB.prepare(query)
+        //var retArray = [T]()
+        for item in  items {
+            //let cTime = item[createTime]
+            return RehabDataModel(dataID: item[dataID], didWorkout: item[didWorkout],partOfBody: item[partOfBody],intensity: item[intensity],sets: item[sets],pain: item[pain],createTime: item[createTime])
+        }
+        
+        return RehabDataModel()
+        
+    }
     static func findAll() throws -> [T]? {
 
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
@@ -154,7 +155,7 @@ class TraceOptionsDataHelper: DataHelperProtocol {
         var retArray = [T]()
         let items = try DB.prepare(table)
         for item in items {
-            retArray.append(TraceOptionsDataModel(dataID: item[dataID], title: item[title],goal: item[goal],unit: item[unit],shortUnits: item[shortUnits],icon: item[icon]))
+            retArray.append(RehabDataModel(dataID: item[dataID], didWorkout: item[didWorkout],partOfBody: item[partOfBody],intensity: item[intensity],sets: item[sets],pain: item[pain],createTime: item[createTime]))
         }
         
         return retArray

@@ -15,10 +15,12 @@ class UserinfoDataHelper: DataHelperProtocol {
     
     static let userID = Expression<Int>("id")
     static let userName = Expression<String>("username")
-    static let height = Expression<Double>("height")
+    static let heightFeetEx = Expression<Int>("heightFeetEx")
+    static let heightInchesEx = Expression<Int>("heightInchesEx")
     static let weight = Expression<Double>("weight")
-    static let gender = Expression<Bool>("gender")
+    static let gender = Expression<Int>("gender")
     static let picturePath = Expression<String>("picturepath")
+    static let age = Expression<Double>("age")
     static let createTime = Expression<String>("createTime")
 
     
@@ -35,10 +37,12 @@ class UserinfoDataHelper: DataHelperProtocol {
             _ = try DB.run( table.create(ifNotExists: true) {t in
                 t.column(userID)
                 t.column(userName)
-                t.column(height)
+                t.column(heightFeetEx)
+                t.column(heightInchesEx)
                 t.column(weight)
                 t.column(gender)
                 t.column(picturePath)
+                t.column(age)
                 t.column(createTime)
             })
         } catch _ {
@@ -52,7 +56,7 @@ class UserinfoDataHelper: DataHelperProtocol {
             throw DataAccessError.datastoreConnectionError
         }
         
-        let insert = table.insert(userID <- item.userID, userName <- item.userName, height <- item.height,weight <- item.weight,gender <- item.gender,picturePath <- item.picturePath,createTime <- item.createTime)
+        let insert = table.insert(userID <- item.userID, userName <- item.userName, heightFeetEx <- item.heightFeetEx,heightInchesEx <- item.heightInchesEx,weight <- item.weight,gender <- item.gender,picturePath <- item.picturePath,age <- item.age,createTime <- item.createTime)
         do {
             let rowId = try DB.run(insert)
             guard rowId >= 0 else {
@@ -72,10 +76,11 @@ class UserinfoDataHelper: DataHelperProtocol {
 
         let query = table.filter(item.userID == userID)
 
-        if try DB.run(query.update(userID <- item.userID, userName <- item.userName, height <- item.height,weight <- item.weight,gender <- item.gender,picturePath <- item.picturePath,createTime <- item.createTime)) > 0 {
+        if try DB.run(query.update(userID <- item.userID, userName <- item.userName, heightFeetEx <- item.heightFeetEx,heightInchesEx <- item.heightInchesEx,weight <- item.weight,gender <- item.gender,picturePath <- item.picturePath,age <- item.age,createTime <- item.createTime)) > 0 {
             return true
         } else {
-            return false
+            let res = try self.insert(item: item )
+            return res > 0
         }
 
     }
@@ -110,7 +115,20 @@ class UserinfoDataHelper: DataHelperProtocol {
             throw DataAccessError.deleteError
         }
     }
-    
+    static func getUser() throws -> T {
+
+        guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
+            throw DataAccessError.datastoreConnectionError
+        }
+        let query = table.filter(1 == userID)
+        let items = try DB.prepare(query)
+        for item in  items {
+            return UserInfoModel(userID: item[userID], userName: item[userName],heightFeetEx: item[heightFeetEx],heightInchesEx: item[heightInchesEx],weight: item[weight],gender:item[gender], picturePath:item[picturePath],createTime: item[createTime],age: item[age])
+        }
+        
+        return UserInfoModel()
+        
+    }
     
     static func find(queryUserID: Int) throws -> [T] {
 
@@ -122,7 +140,7 @@ class UserinfoDataHelper: DataHelperProtocol {
         var retArray = [T]()
         for item in  items {
             
-            retArray.append(UserInfoModel(userID: item[userID], userName: item[userName],height: item[height],weight: item[weight],gender:item[gender], picturePath:item[picturePath],createTime: item[createTime]))
+            retArray.append(UserInfoModel(userID: item[userID], userName: item[userName],heightFeetEx: item[heightFeetEx],heightInchesEx: item[heightInchesEx],weight: item[weight],gender:item[gender], picturePath:item[picturePath],createTime: item[createTime],age: item[age]))
         }
         
         return retArray
@@ -137,7 +155,7 @@ class UserinfoDataHelper: DataHelperProtocol {
         var retArray = [T]()
         let items = try DB.prepare(table)
         for item in items {
-            retArray.append(UserInfoModel(userID: item[userID], userName: item[userName],height: item[height],weight: item[weight],gender:item[gender], picturePath:item[picturePath],createTime: item[createTime]))
+            retArray.append(UserInfoModel(userID: item[userID], userName: item[userName],heightFeetEx: item[heightFeetEx],heightInchesEx: item[heightInchesEx],weight: item[weight],gender:item[gender], picturePath:item[picturePath],createTime: item[createTime],age: item[age]))
         }
         
         return retArray

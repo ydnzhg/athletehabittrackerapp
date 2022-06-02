@@ -6,24 +6,24 @@
 //
 
 import SwiftUI
-
 struct InfoEditView: View {
-    
-    @State private var nameEx = ""
-    @State private var genderEx = 0
-    @State private var ageEx = 0.0
-    @State private var heightFeetEx = 0
-    @State private var heightInchesEx = 0
-    @State private var weightEx = 0.0
-    
+    @ObservedObject var user: UserInfoDataObject
+    //@State private var nameEx = ""
+    //@State private var genderEx = 0
+    //@State private var ageEx = 0.0
+    //@State private var heightFeetEx = 0
+    //@State private var heightInchesEx = 0
+    //@State private var weightEx = 0.0
+    //var  userData = UserInfoModel()
+
     var body: some View {
         VStack(spacing: 20) {
-            NameTextField(image: "signature", placeholder: "Name", value: $nameEx)
+            NameTextField(image: "signature", placeholder: "Name", value: $user.userName)
                 .padding(.top, 10)
-            GenderPicker(image: "person.fill", label: "Gender", value: $genderEx)
-            AgeSlider(image: "calendar", label: "Age", units: "yrs", value: $ageEx)
-            HeightPicker(image: "ruler.fill", label: "Height", value1: $heightFeetEx, value2: $heightInchesEx)
-            WeightSlider(image: "scalemass.fill", label: "Weight", units: "lbs", value: $weightEx)
+            GenderPicker(image: "person.fill", label: "Gender", value: $user.gender)
+            AgeSlider(image: "calendar", label: "Age", units: "yrs", value: $user.age)
+            HeightPicker(image: "ruler.fill", label: "Height", value1: $user.heightFeetEx, value2: $user.heightInchesEx)
+            WeightSlider(image: "scalemass.fill", label: "Weight", units: "lbs", value: $user.weight)
             Spacer()
         }
     }
@@ -31,7 +31,7 @@ struct InfoEditView: View {
 
 struct InfoEditView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoEditView()
+        InfoEditView(user:UserInfoDataObject())
     }
 }
 

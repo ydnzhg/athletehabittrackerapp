@@ -36,7 +36,7 @@ struct ContentView: View {
                 case 0:
                     VStack {
                         DayNavigationView(isPresentingCalendarView: $isPresentingCalendarView, date: $date, timePeriod: "Today")
-                        DailyView(isPresentingInfoEditView: .constant(true), entries: entries, measurements: measurements)
+                        DailyView(isPresentingInfoEditView: .constant(true))
                     }
                 case 1:
                     VStack {

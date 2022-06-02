@@ -21,9 +21,9 @@ struct DailyView: View {
     @State var isPresentingHeartRateModalView = false
 
     @State var isPresentingEntryInputView = false
-    
-    let entries: [Entry]
-    let measurements: [Measurement]
+    @ObservedObject var traceOptionsObject = TraceOptionsDataObject(detail: true, date: Date())
+    //let entries: [Entry]
+   // let measurements: [Measurement]
     
     var columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: 2)
     
@@ -34,14 +34,14 @@ struct DailyView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     
-                    EntryCardView(isPresentingModalView: $isPresentingSleepModalView, entry: entries[0])
-                    EntryCardView(isPresentingModalView: $isPresentingHydrationModalView, entry: entries[1])
-                    EntryCardView(isPresentingModalView: $isPresentingProteinModalView, entry: entries[2])
-                    EntryCardView(isPresentingModalView: $isPresentingCalorieModalView, entry: entries[3])
-                    EntryCardView(isPresentingModalView: $isPresentingStretchingModalView, entry: entries[4])
-                    EntryCardView(isPresentingModalView: $isPresentingWorkoutModalView, entry: entries[5])
-                    MeasurementCardView(isPresentingModalView: $isPresentingWeightModalView, measurement: measurements[0])
-                    MeasurementCardView(isPresentingModalView: $isPresentingHeartRateModalView, measurement: measurements[1])
+                    EntryCardView(isPresentingModalView: $isPresentingSleepModalView, entry: traceOptionsObject.optionsArray[0])
+                    EntryCardView(isPresentingModalView: $isPresentingHydrationModalView, entry: traceOptionsObject.optionsArray[1])
+                    EntryCardView(isPresentingModalView: $isPresentingProteinModalView, entry: traceOptionsObject.optionsArray[2])
+                    EntryCardView(isPresentingModalView: $isPresentingCalorieModalView, entry: traceOptionsObject.optionsArray[3])
+                    EntryCardView(isPresentingModalView: $isPresentingStretchingModalView, entry: traceOptionsObject.optionsArray[4])
+                    EntryCardView(isPresentingModalView: $isPresentingWorkoutModalView, entry: traceOptionsObject.optionsArray[5])
+                    MeasurementCardView(isPresentingModalView: $isPresentingWeightModalView, measurement: traceOptionsObject.optionsArray[6])
+                    MeasurementCardView(isPresentingModalView: $isPresentingHeartRateModalView, measurement: traceOptionsObject.optionsArray[7])
 
                     
                     // example of a card with no input yet
@@ -91,7 +91,7 @@ struct DailyView: View {
                 , alignment: .bottomTrailing)
         .sheet(isPresented: $isPresentingEntryInputView) {
             NavigationView {
-                EntryInputView(entries: entries, measurements: measurements)
+                EntryInputView(traceOptionsObject:traceOptionsObject)
                     .navigationTitle("Input Info")
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
@@ -101,6 +101,7 @@ struct DailyView: View {
                         }
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Done") {
+                                traceOptionsObject.commitToOptionsDetailDB()
                                 isPresentingEntryInputView = false
                             }
                         }
@@ -110,11 +111,11 @@ struct DailyView: View {
     }
 }
 
-struct DailyView_Previews: PreviewProvider {
-    static var previews: some View {
-        DailyView(isPresentingInfoEditView: .constant(true), entries: Entry.sampleData, measurements: Measurement.sampleData)
-    }
-}
+//struct DailyView_Previews: PreviewProvider {
+  //  static var previews: some View {
+  //      DailyView(isPresentingInfoEditView: .constant(true), entries: Entry.sampleData, measurements: Measurement.sampleData)
+  //  }
+//}
 
 func recoveryScoreCalculation() -> Int {
     var total: Int = 0
@@ -128,7 +129,7 @@ struct EntryCardView: View {
     
     @Binding var isPresentingModalView: Bool
     
-    var entry: Entry
+    var entry: TraceOptionsDataModel
     
     var body: some View {
         Button(action: {
@@ -139,12 +140,12 @@ struct EntryCardView: View {
                     Text("\(entry.title)")
                         .foregroundColor(.white)
                     
-                    Text("\(entry.lastWeek[0]) \(entry.units)")
+                    Text("\(entry.getDetailScore(date: Date())) \(entry.unit)")
                         .font(.title.bold())
                         .foregroundColor(.white)
                     
                     HStack {
-                        Text("Goal: \(entry.goal) \(entry.units)")
+                        Text("Goal: \(entry.goal) \(entry.unit)")
                             .foregroundColor(.white)
                             .font(.subheadline)
                         Spacer(minLength: 0)
@@ -171,7 +172,7 @@ struct MeasurementCardView: View {
     
     @Binding var isPresentingModalView: Bool
     
-    var measurement: Measurement
+    var measurement: TraceOptionsDataModel
     
     var body: some View {
         Button(action: {
@@ -187,7 +188,7 @@ struct MeasurementCardView: View {
                         .foregroundColor(.white)
                     
                     HStack {
-                        Text("Goal: \(measurement.goal) \(measurement.units)")
+                        Text("Goal: \(measurement.goal) \(measurement.unit)")
                             .foregroundColor(.white)
                             .font(.subheadline)
                         Spacer(minLength: 0)

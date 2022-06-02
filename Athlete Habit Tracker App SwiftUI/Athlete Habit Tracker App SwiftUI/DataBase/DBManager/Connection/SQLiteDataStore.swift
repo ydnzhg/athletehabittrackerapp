@@ -1,6 +1,6 @@
 //
 //  SQLiteDataStore.swift
-//  HQSQLite-Swift
+//
 //
 //  Created by yejf on 2022/5/28.
 //  Copyright © 2022年 yejf. All rights reserved.
@@ -20,23 +20,30 @@ enum DataAccessError: Swift.Error {
 
 class SQLiteDataStore {
     static let sharedInstance = SQLiteDataStore()
+    var  dbVersion = 5
     let BBDB: Connection?
-    
+    var initOk : Bool
     private init() {
-        
+        initOk = false
         let dirs: [NSString] =
         NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory,
                                                 FileManager.SearchPathDomainMask.allDomainsMask, true) as [NSString]
         
         let dir = dirs[0]
-        
+        let defaults = UserDefaults.standard
+        let saveDbVersion = defaults.integer(forKey: "dbVersion")
         let path = dir.appendingPathComponent("myDB.sqlite");
-       // let fileManager = FileManager.default
-       // if fileManager.fileExists(atPath: path) {
-       // do {
-               // try fileManager.removeItem(atPath: path)
-               // } catch _{}
-       // }
+        if(saveDbVersion != dbVersion)
+        {
+            let fileManager = FileManager.default
+             if fileManager.fileExists(atPath: path) {
+             do {
+                    try fileManager.removeItem(atPath: path)
+                  } catch _{}
+             }
+            defaults.setValue(dbVersion, forKey: "dbVersion")
+        }
+        
         print("The DB Path:",path)
         
         
@@ -57,9 +64,14 @@ class SQLiteDataStore {
     
     func createTables() throws{
         do {
+            if(initOk)
+            {
+                return;
+            }
             try UserinfoDataHelper.createTable()
             try TraceOptionsDataHelper.createTable()
             try TraceOptionsDetailDataHelper.createTable()
+            initOk = true
             //TraceOptionsDetailDataHelper.testDemo()
         } catch {
             throw DataAccessError.datastoreConnectionError
