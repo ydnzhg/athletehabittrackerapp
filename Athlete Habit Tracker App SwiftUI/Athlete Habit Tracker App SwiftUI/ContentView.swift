@@ -22,7 +22,8 @@ struct ContentView: View {
 
     let entries: [Entry]
     let measurements: [Measurement]
-    
+    //add by yejf
+    @ObservedObject var rehabDataObject = RehabDataObject(date:Date())
     @State var selectedTabIndex = 0
     
     let tabBarImageNames = ["list.bullet.rectangle.portrait.fill", "heart.text.square.fill", "sparkle", "chart.xyaxis.line", "person.fill"]
@@ -42,7 +43,31 @@ struct ContentView: View {
                     VStack {
                         DayNavigationView(isPresentingCalendarView: $isPresentingCalendarView, date: $date, timePeriod: "Today")
                             .padding(.bottom, -5)
-                        RehabView()
+                        RehabView(rehabDataObject:rehabDataObject)
+                        .onReceive([rehabDataObject.didWorkout].publisher.first())
+                        {(value) in
+                                rehabDataObject.commitToDB()
+                        }
+                        .onReceive([rehabDataObject.partOfBody].publisher.first())
+                        {
+                            (value) in
+                                rehabDataObject.commitToDB()
+                        }
+                        .onReceive([rehabDataObject.intensity].publisher.first())
+                        {
+                            (value) in
+                                rehabDataObject.commitToDB()
+                        }
+                        .onReceive([rehabDataObject.sets].publisher.first())
+                        {
+                            (value) in
+                                rehabDataObject.commitToDB()
+                        }
+                        .onReceive([rehabDataObject.pain].publisher.first())
+                        {
+                            (value) in
+                                rehabDataObject.commitToDB()
+                        }
                     }
                 case 2:
                     LoadCapacityPredictionView(intensity: .constant(0), sets: .constant(0), pain: .constant(0))

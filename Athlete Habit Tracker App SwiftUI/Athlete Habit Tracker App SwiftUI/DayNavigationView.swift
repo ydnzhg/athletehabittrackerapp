@@ -36,7 +36,9 @@ struct DayNavigationView: View {
             }
             .padding()
             .popover(present: $isPresentingCalendarView) {
-                CalendarPopoverView(date: $date)
+                CalendarPopoverView(date: $date).onDisappear(){
+                    
+                }
             }
         }
         

@@ -8,25 +8,26 @@
 import SwiftUI
 
 struct RehabView: View {
-    @State private var didWorkout = 1
-    @State private var partOfBody = 1
-    @State private var intensity = 0.0
-    @State private var sets = 0
-    @State private var pain = 0.0
-
+    //@State private var didWorkout = 1
+    //@State private var partOfBody = 1
+    //@State private var intensity = 0.0
+    //@State private var sets = 0
+    //@State private var pain = 0.0
+    //add by yejf
+    @ObservedObject var rehabDataObject : RehabDataObject
     var body: some View {
         ScrollView {
             VStack {
                 
                 
                 
-                WorkoutQuestion(selection: $didWorkout)
+                WorkoutQuestion(selection: $rehabDataObject.didWorkout)
                 
-                BodyPartQuestion(selection: $partOfBody)
+                BodyPartQuestion(selection: $rehabDataObject.partOfBody)
                 
-                SetsAndIntensityQuestion(sets: $sets, intensity: $intensity)
+                SetsAndIntensityQuestion(sets: $rehabDataObject.sets, intensity: $rehabDataObject.intensity)
                 
-                PainQuestion(pain: $pain)
+                PainQuestion(pain: $rehabDataObject.pain)
             }
         }
     }
@@ -34,7 +35,7 @@ struct RehabView: View {
 
 struct RehabView_Previews: PreviewProvider {
     static var previews: some View {
-        RehabView()
+        RehabView(rehabDataObject:RehabDataObject(date:Date()))
     }
 }
 
@@ -59,6 +60,7 @@ struct WorkoutQuestion: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
+                
             }
             .padding()
         }

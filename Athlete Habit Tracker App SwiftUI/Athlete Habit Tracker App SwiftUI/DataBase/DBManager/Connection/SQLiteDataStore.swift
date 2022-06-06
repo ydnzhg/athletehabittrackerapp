@@ -20,7 +20,7 @@ enum DataAccessError: Swift.Error {
 
 class SQLiteDataStore {
     static let sharedInstance = SQLiteDataStore()
-    var  dbVersion = 5
+    var  dbVersion = 7
     let BBDB: Connection?
     var initOk : Bool
     private init() {
@@ -71,6 +71,7 @@ class SQLiteDataStore {
             try UserinfoDataHelper.createTable()
             try TraceOptionsDataHelper.createTable()
             try TraceOptionsDetailDataHelper.createTable()
+            try RehabDataHelper.createTable()
             initOk = true
             //TraceOptionsDetailDataHelper.testDemo()
         } catch {

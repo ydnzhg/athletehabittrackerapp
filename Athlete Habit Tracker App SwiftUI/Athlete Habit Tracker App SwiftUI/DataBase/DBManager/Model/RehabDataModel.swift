@@ -10,7 +10,7 @@ import UIKit
 import SQLite
 /// RehabData
 struct RehabDataModel {
-    var dataID: Int = 1
+    var dataID: Int = 0
     var didWorkout: Int = 1
     var partOfBody: Int = 1
     var intensity: Double = 0.0
@@ -42,33 +42,123 @@ class RehabDataObject: ObservableObject {
     @Published var sets: Int
     @Published var pain: Double
     var createTime: String
+    var dataModel : RehabDataModel
+    var useDate: Date
     init() {
         if(!SQLiteDataStore.sharedInstance.initOk)
         {
             try! SQLiteDataStore.sharedInstance.createTables();
         }
         
-        let data = try! RehabDataHelper.findOneDay(date: Date())
-        self.dataID = data.dataID
-        self.didWorkout = data.didWorkout
-        self.partOfBody = data.partOfBody;
-        self.intensity = data.intensity;
-        self.pain = data.pain
-        self.sets = data.sets
-        self.createTime = data.createTime
+        dataModel = try! RehabDataHelper.findOneDay(date: Date());
+        self.dataID = dataModel.dataID;
+        self.didWorkout = dataModel.didWorkout;
+        self.partOfBody = dataModel.partOfBody;
+        self.intensity = dataModel.intensity;
+        self.pain = dataModel.pain
+        self.sets = dataModel.sets
+        self.createTime = dataModel.createTime
+        useDate = Date();
         
     }
-    func commitToDB()-> Bool {
-        do {
-            let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let dateStr = timeFormatter.string(from:Date()) as String
-            let res = try RehabDataHelper.update(item: RehabDataModel(dataID: dataID, didWorkout: didWorkout,partOfBody: partOfBody,intensity: intensity,sets: sets,pain: pain,createTime: dateStr))
-            return res
-        } catch _ {
+    init(date: Date) {
+        if(!SQLiteDataStore.sharedInstance.initOk)
+        {
+            try! SQLiteDataStore.sharedInstance.createTables();
+        }
+       
+        dataModel = try! RehabDataHelper.findOneDay(date:date);
+        self.dataID = dataModel.dataID;
+        self.didWorkout = dataModel.didWorkout
+        self.partOfBody = dataModel.partOfBody;
+        self.intensity = dataModel.intensity;
+        self.pain = dataModel.pain;
+        self.sets = dataModel.sets;
+        self.createTime = dataModel.createTime;
+        useDate = date;
+    }
+    func getRehabDataInDate(date: Date) -> Bool
+    {
+        do{
+            dataModel = try RehabDataHelper.findOneDay(date: date);
+            self.dataID = dataModel.dataID
+            self.didWorkout = dataModel.didWorkout
+            self.partOfBody = dataModel.partOfBody;
+            self.intensity = dataModel.intensity;
+            self.pain = dataModel.pain
+            self.sets = dataModel.sets
+            self.createTime = dataModel.createTime
+            useDate = date;
+            return true
+
+        }catch _ {
             print("inster userModel error")
         }
         
-        return false
+        return false;
+    }
+    func commitToDB()-> Void {
+        do {
+            if(dataID == 0)
+            {
+                let timeFormatter = DateFormatter()
+                timeFormatter.dateFormat = "yyyy-MM-dd"
+                let dateStr = timeFormatter.string(from:useDate) as String
+                dataID = try RehabDataHelper.getNewId()
+                let res = try RehabDataHelper.insert(item: RehabDataModel(dataID: dataID, didWorkout: didWorkout,partOfBody: partOfBody,intensity: intensity,sets: sets,pain: pain,createTime: dateStr))
+                return
+            }
+            var  res = false
+            if(dataModel.didWorkout != didWorkout)
+            {
+                res = try RehabDataHelper.updateColumn(columnId: 0, value: Double(didWorkout), dataID: dataID)
+                if(res)
+                {
+                    dataModel.didWorkout = didWorkout
+                }
+            }
+            
+            if(dataModel.partOfBody != partOfBody)
+            {
+                res = try RehabDataHelper.updateColumn(columnId: 1, value: Double(partOfBody), dataID: dataID)
+                if(res)
+                {
+                    dataModel.partOfBody = partOfBody
+                }
+            }
+            
+            if(dataModel.intensity != intensity)
+            {
+                res = try RehabDataHelper.updateColumn(columnId: 2, value: Double(intensity), dataID: dataID)
+                if(res)
+                {
+                    dataModel.intensity = intensity
+                }
+            }
+            
+            if(dataModel.sets != sets)
+            {
+                res = try RehabDataHelper.updateColumn(columnId: 3, value: Double(sets), dataID: dataID)
+                if(res)
+                {
+                    dataModel.sets = sets
+                }
+            }
+            
+            if(dataModel.pain != pain)
+            {
+                res = try RehabDataHelper.updateColumn(columnId: 4, value: Double(pain), dataID: dataID)
+                if(res)
+                {
+                    dataModel.pain = pain
+                }
+            }
+            return
+            
+        } catch _ {
+            print("update userModel error")
+        }
+        
+        return
     }
 }

@@ -62,7 +62,45 @@ class RehabDataHelper: DataHelperProtocol {
             throw DataAccessError.insertError
         }
     }
-    
+    static func updateColumn(columnId:Int,value:Double,dataID:Int) throws -> Bool{
+        guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
+            throw DataAccessError.datastoreConnectionError
+        }
+        let query = table.filter(dataID == self.dataID)
+        var res  = false
+        switch columnId {
+            case 0:
+                if try DB.run(query.update(didWorkout <- Int(value))) > 0 {
+                    res = true;
+                }
+                break
+            
+            case 1:
+                if try DB.run(query.update(partOfBody <- Int(value))) > 0 {
+                    res = true;
+                }
+                break
+            case 2:
+                if try DB.run(query.update(intensity <- value)) > 0 {
+                    res = true;
+                }
+                break
+            case 3:
+                if try DB.run(query.update(sets <- Int(value))) > 0 {
+                    res = true;
+                }
+                break
+            case 4:
+                if try DB.run(query.update(pain <- value)) > 0 {
+                    res = true;
+                }
+            break
+                
+        default:
+            res = false
+        }
+        return res
+    }
     static func update(item: T) throws -> Bool {
         
         guard let DB = SQLiteDataStore.sharedInstance.BBDB else {
@@ -134,7 +172,7 @@ class RehabDataHelper: DataHelperProtocol {
             throw DataAccessError.datastoreConnectionError
         }
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        timeFormatter.dateFormat = "yyyy-MM-dd"
         let dateStr = timeFormatter.string(from:date) as String
         let query = table.filter(createTime == dateStr)
         let items = try DB.prepare(query)
